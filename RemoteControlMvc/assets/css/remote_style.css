@@ -1,0 +1,300 @@
+.remote {
+	margin: 0 auto;
+	border: 1px solid #000;
+	border-radius: 20px;
+	background: #fff;
+	color: #000;
+	padding: 20px;
+	box-shadow: inset 2px 1px 20px 3px #ccc;
+}
+
+#box #bh {
+	margin: 0px auto;
+}
+
+
+/* #box #up,#box #down { */
+/* 	width: 120px; */
+/* } */
+
+/* #box #lor #left { */
+/* 	margin-right: -22px; */
+/* } */
+
+/* #box #lor #right { */
+/* 	margin-left: -22px; */
+/* } */
+
+/* #box #ddown #down { */
+/* 	margin-top: -29px; */
+/* } */
+
+#box a:hover {
+	cursor: pointer;
+}
+/*
+	KEYBOARD
+*/
+#kbcontainer {
+	margin: 10px auto;
+	width: 688px;
+	font: 71%/1.5 Verdana, Sans-Serif;
+	background: #eee;
+	color: #000;
+	display: none;
+}
+
+#write {
+	margin: 0 0 5px;
+	padding: 5px;
+	width: 671px;
+	height: 200px;
+	font: 1em/1.5 Verdana, Sans-Serif;
+	background: #fff;
+	border: 1px solid #f9f9f9;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+#keyboard {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#keyboard li {
+	float: left;
+	margin: 0 5px 5px 0;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	background: #fff;
+	border: 1px solid #f9f9f9;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.capslock,.tab,.left-shift {
+	clear: left;
+}
+
+#keyboard .tab,#keyboard .delete {
+	width: 70px;
+}
+
+#keyboard .capslock {
+	width: 80px;
+}
+
+#keyboard .return {
+	width: 77px;
+}
+
+#keyboard .left-shift {
+	width: 95px;
+}
+
+#keyboard .right-shift {
+	width: 109px;
+}
+
+.lastitem {
+	margin-right: 0;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+#keyboard .space {
+	clear: left;
+	width: 681px;
+}
+
+.on {
+	display: none;
+}
+
+#keyboard li:hover {
+	position: relative;
+	top: 1px;
+	left: 1px;
+	border-color: #e5e5e5;
+	cursor: pointer;
+}
+
+.roundbutton {
+	width: 52px;
+	display: inline-block;
+	text-shadow: /* Simulating Text Stroke */
+        -1px -1px 0 #000, 
+        1px -1px 0 #000, 
+        -1px 1px 0 #000, 
+        1px 1px 0 #000;
+
+    border: 1px solid rgba(0,0,0,0.5);
+    border-bottom: 3px solid rgba(0,0,0,0.5);
+
+    background: rgba(0,0,0,0.25);
+
+    box-shadow: 
+        0 2px 8px rgba(0,0,0,0.5), /* Exterior Shadow */
+        inset 0 1px rgba(255,255,255,0.3), /* Top light Line */
+        inset 0 1px rgba(255,255,255,0.2), /* Top Light Shadow */
+        inset 0 10px 20px rgba(255,255,255,0.25), /* Sides Light Shadow */
+        inset 0 0 0 rgba(0,0,0,0.3); /* Dark Background */
+
+    -o-box-shadow: 
+        0 2px 8px rgba(0,0,0,0.5),
+        inset 0 1px rgba(255,255,255,0.3),
+        inset 0 1px rgba(255,255,255,0.2),
+        inset 0 10px 20px rgba(255,255,255,0.25),
+        inset 0 0 0 rgba(0,0,0,0.3);
+
+    -webkit-box-shadow: 
+        0 2px 8px rgba(0,0,0,0.5),
+        inset 0 1px rgba(255,255,255,0.3),
+        inset 0 1px rgba(255,255,255,0.2),
+        inset 0 10px 20px rgba(255,255,255,0.25),
+        inset 0 0 0 rgba(0,0,0,0.3);
+
+    -moz-box-shadow:
+        0 2px 8px rgba(0,0,0,0.5),
+        inset 0 1px rgba(255,255,255,0.3),
+        inset 0 1px rgba(255,255,255,0.2),
+        inset 0 10px 20px rgba(255,255,255,0.25),
+        inset 0 0 0 rgba(0,0,0,0.3);
+
+}
+/*--------------------------buttons -------------------------------------------*/
+
+
+.remotetable a.playeraction, .remotetable a.xbmcAction, .remotetable a.xbmcSimpleAction, .remotetable a.staticimage{
+	display: inline-block !important;
+}
+a#play{
+	background-position: -358px -175px !important;
+    height: 51px;
+    width: 78px;
+}
+a.pvrscan{
+	background-position: -257px -175px !important;
+    height: 51px;
+    width: 50px;
+}
+a#rewind{
+	background-position: -305px -175px !important;
+    height: 51px;
+    width: 53px;
+}
+a#fastforward{
+	background-position: -436px -175px !important;
+    height: 51px;
+    width: 52px;
+}
+
+a#ok {
+    background: url("../img/navtv.png") no-repeat scroll -69px -70px rgba(0, 0, 0, 0) !important;
+    height: 65px;
+    width: 68px;
+}
+a#right {
+    background: url("../img/navtv.png") no-repeat scroll -135px -70px rgba(0, 0, 0, 0) !important;
+    height: 64px;
+    width: 68px;
+}
+a#left {
+    background: url("../img/navtv.png") no-repeat scroll 4px -69px rgba(0, 0, 0, 0) !important;
+    height: 65px;
+    width: 72px;
+}
+a#up {
+    background: url("../img/navtv.png") no-repeat scroll -70px -3px rgba(0, 0, 0, 0) !important;
+    height: 68px;
+    width: 64px;
+}
+a#down {
+    background: url("../img/navtv.png") no-repeat scroll -68px -133px rgba(0, 0, 0, 0) !important;
+    height: 69px;
+    width: 64px;
+}
+a#vup{
+	background-position: 0px 0px !important;
+}
+a#vdn{
+	background-position: 0px 100% !important;
+}
+a#mute{
+	background-position: 0px 50% !important;
+}
+a.volbutton{
+	background: url("../img/volume.png") no-repeat scroll 0px 0px rgba(0, 0, 0, 0) !important;
+	height: 69px;
+    width: 67px;
+}
+a#back {
+    background: url("../img/navtv.png") no-repeat scroll 0 -1px rgba(0, 0, 0, 0) !important;
+    height: 68px;
+    width: 69px;
+}
+a#home {
+    background: url("../img/navtv.png") no-repeat scroll -134px 4px rgba(0, 0, 0, 0) !important;
+    height: 72px;
+    width: 67px;
+}
+a#info {
+    background: url("../img/navtv.png") no-repeat scroll -130px -133px rgba(0, 0, 0, 0) !important;
+    height: 69px;
+    width: 70px;
+}
+a#contextmenu {
+    background: url("../img/navtv.png") no-repeat scroll 0 -133px rgba(0, 0, 0, 0) !important;
+    height: 69px;
+    width: 66px;
+}
+tr.headerRemote td{
+	height: 20%;
+}
+
+
+.roundbutton:active {
+	top: 1px;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#eaeaea),
+		to(#f6f6f6));
+	background-image: -webkit-linear-gradient(top, #eaeaea, #f6f6f6);
+	background-image: -moz-linear-gradient(top, #eaeaea, #f6f6f6);
+	background-image: -ms-linear-gradient(top, #eaeaea, #f6f6f6);
+	background-image: -o-linear-gradient(top, #eaeaea, #f6f6f6);
+	background-image: linear-gradient(top, #eaeaea, #f6f6f6);
+}
+
+div#box{
+	min-height: 400px;
+	font-size: 0;
+	height: 100%;
+}
+div#leftHome{
+    float: left;
+    width: 19%;
+    font-size: 0;
+    vertical-align: middle;
+}
+
+tr.bodyRemote{
+	vertical-align:text-top;
+	height: 70%;
+}
+table.remotetable{
+
+	width: 100%;
+    padding: 10px;
+}
+
+tr.headerRemote{
+	height: 20%;
+}
+table.remotetable,.page-inner
+{
+	height: 100%;
+}
