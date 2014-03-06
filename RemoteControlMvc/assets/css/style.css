@@ -161,13 +161,10 @@ html header {
 #leftsystem {
 	float: left;
 	width: 35%;
-	text-align: left;
-	color: #f0e861;
-	font-weight: bold;
+	margin-top: 32px;
 }
 
 #rightsystem {
-	text-align: left;
 	float: right;
 	width: 64%;
 }

@@ -6,10 +6,11 @@ render('_header',array('title'=>$title,
 if (HostsManager::IsConnected()) {
 	?>
 <div id="leftsystem">
-   <ul>
+   <ul data-role="listview" data-inset="true">
       <?php foreach ($responsegroup["result"]["channelgroups"] as $group){?>
-      <li onclick="$(this).children()[0].click()"><a
-         class="xbmcAction"
+      <li><a
+         class="xbmcAction "
+         data-ajax="false"
          data-method="PVR.GetChannelGroupDetails"
          id='<?= $group["channelgroupid"]?>'
          data-params='{"channelgroupid":<?= $group["channelgroupid"]?>}'
@@ -18,19 +19,20 @@ if (HostsManager::IsConnected()) {
    </ul>
 </div>
 <div id="rightsystem">
-   <table>
+   <ul data-role="listview" data-filter="true">
       <?php foreach ($response["result"]["channels"] as $channel){?>
-      <tr>
-         <td><a
+      <li>
+        <a
             href="#"
+            data-ajax="false"
             class="xbmcAction"
             data-method="Player.Open"
             data-params='{"item":{"channelid":<?= $channel["channelid"]?>}}'
          >(<?= $channel["channelid"]?>) <b><?= $channel["label"]?> </b>
-         </a></td>
-      </tr>
+         </a>
+      </li>
       <?php }?>
-   </table>
+   </ul>
 </div>
 
 <?php }?>

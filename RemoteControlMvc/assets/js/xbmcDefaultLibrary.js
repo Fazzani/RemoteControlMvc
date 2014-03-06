@@ -649,27 +649,31 @@ $(function () {
 
                 })
         .on('click', '.xbmcAction', function () {
+        			var listchnls = $('#rightsystem ul');
                     $.getJSON('inputExecuteAction.php?id=1&method=' + $(this).attr('data-method') + "&param=" + $(this).attr('data-params'))
                             .done(
                                     function (data) {
+                                    	console.log('.xbmcAction');
                                         var obj = $.parseJSON(JSON.stringify(data));
                                         if (obj.error)
                                             console.log(obj.error.message);
                                         else if (obj.result.channelgroupdetails)
                                         {
                                             var html = "";
+                                            var oldclassLi = listchnls.find('a').attr("class");
+                                            console.log(oldclassLi);
                                             $.each(obj.result.channelgroupdetails.channels,
                                                             function (i, item) {
-                                                                html += "<tr><td><a href=\"#\" class=\"xbmcAction\" data-method=\"Player.Open\" data-params='{\"item\":{\"channelid\":"
+                                                                html += "<li><a href=\"#\" class=\""+oldclassLi+"\" data-method=\"Player.Open\" data-params='{\"item\":{\"channelid\":"
                                                                         + item.channelid
                                                                         + "}}'>("
                                                                         + item.channelid
-                                                                        + ")  <b>"
+                                                                        + ") "
                                                                         + item.label
-                                                                        + "</b></a></td></tr>";
+                                                                        + "</a></li>";
                                                             });
-                                            $('#rightsystem table').html(html);
-                                            // console.log(obj.result.channelgroupdetails.channelgroupid);
+                                            
+                                            listchnls.html(html);
                                             $('li.selected').removeClass('selected');
                                             $('#' + obj.result.channelgroupdetails.channelgroupid)
                                                     .parent('li').addClass('selected');
