@@ -72,7 +72,7 @@
    >
 <!--    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a> -->
       <h4>Les paramètres de la hôte XBMC</h4>
-      <form
+      <form 
          action="includes/config.php"
          method="post"
          id="configform"

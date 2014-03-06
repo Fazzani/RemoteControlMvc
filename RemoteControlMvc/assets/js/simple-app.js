@@ -2,7 +2,7 @@ $(function() {
 	var configpopup = $("#hostconfigpopup");
 	var listConfigPopup = $('#savedconfig');
 	//$.mobile.ajaxEnabled = false;
-    //$.mobile.pushStateEnabled = false;
+    $.mobile.pushStateEnabled = false;
 	/**
 	 * Gestion_des_configs***********************************************
 	 */
@@ -91,79 +91,28 @@ $(function() {
 		// localStorage.setObject("lastconnexion","{ 'one': 1, 'two': 2,
 		// 'three': 3 }");
 	}
-
-	/**
-	 * ***********************************************-
-	 * swiper-*************************************************
-	 */
-//
-//	// Init Navigation
-//	var nav = $('.swiper-nav').swiper({
-//		slidesPerView : 'auto',
-//		freeMode : true,
-//		freeModeFluid : true,
-//		onSlideClick : function(nav) {
-//			pages.swipeTo(nav.clickedSlideIndex)
-//		}
-//	})
-//
-//	// Function to Fix Pages Height
-//	function fixPagesHeight() {
-//		$('.swiper-pages').css({
-//			height : $(window).height() - nav.height
-//		})
-//	}
-//	$(window).on('resize', function() {
-//		fixPagesHeight()
-//	});
-//
-//	fixPagesHeight()
-//
-//	// Init Pages
-//	var pages = $('.swiper-pages').swiper({
-//		simulateTouch : false,
-//		onSlideChangeEnd : function() {
-//			$('input').blur();
-//			$('.swiper-nav .swiper-slide').removeClass('selected');
-//			$('.swiper-nav .swiper-slide').eq([ pages.activeIndex ]).addClass('selected');
-//		},
-//		hashNav : true
-//	})
-//
-//	// Scroll Containers
-//	$('.scroll-container').each(function() {
-//		$(this).swiper({
-//			mode : 'vertical',
-//			simulateTouch : false,
-//			scrollContainer : true,
-//			mousewheelControl : true,
-//			hashNav : true,
-//			scrollbar : {
-//				container : $(this).find('.swiper-scrollbar')[0]
-//			}
-//		})
-//	})
-//
-//	// Gallery
-//	var swiperGallery = $('.swiper-gallery').swiper({
-//		mode : 'vertical',
-//		slidesPerView : 'auto',
-//		freeMode : true,
-//		freeModeFluid : true,
-//		scrollbar : {
-//			container : $('.swiper-gallery .swiper-scrollbar')[0]
-//		}
-//	})
-//	swiperGallery.reInit();
-//
-//	var swiperGallerymovies = $('.swiper-gallery-movies').swiper({
-//		mode : 'vertical',
-//		slidesPerView : 'auto',
-//		freeMode : true,
-//		freeModeFluid : true,
-//		scrollbar : {
-//			container : $('.swiper-gallery-movies .swiper-scrollbar')[0]
-//		}
-//	})
-//	swiperGallerymovies.reInit();
 });
+/**
+ * ***********************************************-
+ * swiper-*************************************************
+ */
+
+$(document).on('pagecreate', function(event){
+	  $('div.ui-page').on("swipeleft", function () {
+		  var idpage = $(this).attr('id');
+		  href = $("div.ui-navbar a[id='" + idpage + "']").parent().next().children().attr('href');
+		  //console.log(href);
+		  if (href.length > 0) {
+			  $.mobile.changePage(href);
+		  }
+	  });
+
+	  $('div.ui-page').on("swiperight", function () {
+		  var idpage = $(this).attr('id');
+		  href = $("div.ui-navbar a[id='" + idpage + "']").parent().prev().children().attr('href');
+		  //console.log(href);
+		  if (href.length > 0) {
+			  $.mobile.changePage(href);
+		  }
+	  });
+	});

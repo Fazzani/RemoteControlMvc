@@ -33,14 +33,7 @@
    rel="stylesheet"
    href="assets/css/remote_style.css"
 />
-<link
-   rel="stylesheet"
-   href="assets/css/idangerous.swiper.css"
-/>
-<link
-   rel="stylesheet"
-   href="assets/css/idangerous.swiper.scrollbar.css"
-/>
+
 <link
    rel="stylesheet"
    href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css"
@@ -81,20 +74,20 @@ console.log('isFirstCnx : ' + isFirstCnx);
 console.log('isConnected : ' + isConnected);
 </script>
 </head>
-<body> 
+<body class="cbp-spmenu-push"> 
 
 <div data-role="page" data-theme="b" id="<?php echo strtolower(str_replace(" ","",$title))?>">
 
-	<div data-role="header" data-theme="b"  data-position="fixed" data-id="mainheader">
+	<div data-role="header" data-theme="b" data-position="fixed" data-id="mainheader">
 <!-- 	    <a href="./" data-icon="home" data-iconpos="notext" data-transition="fade">Home</a> <h1></h1>-->
 		
 		<div data-role="navbar">
       		<ul>
-        		<li><a href="./" class="ui-btn-active " data-icon="home" data-transition="flow">Home</a></li>
-        		<li><a href="?livetv=0" data-icon="bars" data-transition="flow">Live Tv</a></li>
-        		<li><a href="?tvshows=0" data-icon="camera" data-transition="flow">Tv Shows</a></li>
-        		<li><a href="?movies=0" data-icon="video" data-transition="flow">Movies</a></li>
-        		<li><a href="?settings=0" data-icon="gear" data-transition="flow">Settings</a></li>
+        		<li><a href="./" class="ui-btn-active " data-icon="home" data-transition="flow" id="homee">Home</a></li>
+        		<li><a href="?livetv=0" data-icon="bars" data-transition="flow" id="livetv">Live Tv</a></li>
+        		<li><a href="?tvshows=0" data-icon="camera" data-transition="flow" id="tvshows">Tv Shows</a></li>
+        		<li><a href="?movies=0" data-icon="video" data-transition="flow" id="movies">Movies</a></li>
+        		<li><a href="?settings=0" data-icon="gear" data-transition="flow" id="settings">Settings</a></li>
       		</ul>
     	</div>
 	</div>
