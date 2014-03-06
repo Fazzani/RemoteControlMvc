@@ -1,5 +1,5 @@
 <?php 
-render('_header',array('title'=>$title,
+render('_header', array('title'=>$title,
 			'url'		=> $url,
 			'rurl'		=> $rurl));?>
 <?php
@@ -8,7 +8,7 @@ try {
 		if (isset ( $response ["result"] ["movies"] ))
 			foreach ( $response ["result"] ["movies"] as $movie ) {
 				?>
-<div class="swiper-slide">
+<div>
 	<h2>
 		<a
 			href="#"

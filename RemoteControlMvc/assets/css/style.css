@@ -182,10 +182,16 @@ a {
 	text-shadow: 2px 3px 1px #000000;
 }
 
-.selected {
+.selected{
 	border-left: 0 solid #333333;
 	border-right: 0 solid #000000;
-	box-shadow:0 0 12px #22AADD !important;
+	box-shadow:0 0 12px #22ADDD !important;
+}
+
+.ui-btn-active {
+	background-color: #4F748B !important;
+	border-color: #677E96 !important;
+
 }
 
 li, .ui-box-heighlight {
@@ -213,7 +219,20 @@ span.actions-config{
     font-weight: bold;
 }
 
+.ui-icon-custom-settings:after{
+	background-image: url("../img/cogs_icon&16.png");
+}
+.ui-icon-custom-movies:after{
+	background-image: url("../img/movie_icon&16.png");
 
+	}
+.ui-icon-custom-livetv:after{
+	background-image: url("../img/preso_icon&16.png");
+} 
+
+.ui-icon-custom-tvshows:after{
+	background-image: url("../img/monitor_icon&16.png");
+} 
 /*
 	REMOTE
 */

@@ -26,21 +26,12 @@
 <link
    type="text/css"
    rel="stylesheet"
-   href="assets/css/tvshows_style.css"
-/>
-<link
-   type="text/css"
-   rel="stylesheet"
    href="assets/css/remote_style.css"
 />
 
 <link
    rel="stylesheet"
    href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css"
-/>
-<link
-   rel="stylesheet"
-   href="assets/css/normalize.css"
 />
 <link
    rel="stylesheet"
@@ -83,11 +74,11 @@ console.log('isConnected : ' + isConnected);
 		
 		<div data-role="navbar" id="mainheader">
       		<ul>
-        		<li><a href="./" data-icon="home" data-transition="flow" id="page_home">Home</a></li>
-        		<li><a href="?livetv" data-icon="bars" data-transition="flow" id="page_livetv">Live Tv</a></li>
-        		<li><a href="?tvshows" data-icon="camera" data-transition="flow" id="page_tvshows">Tv Shows</a></li>
-        		<li><a href="?movies" data-icon="video" data-transition="flow" id="page_movies">Movies</a></li>
-        		<li><a href="?settings" data-icon="gear" data-transition="flow" id="page_settings">Settings</a></li>
+        		<li><a href="./" data-icon="home" id="page_home" class="ui-btn-active">Home</a></li>
+        		<li><a href="?livetv" data-icon="custom-livetv" id="page_livetv">Live Tv</a></li>
+        		<li><a href="?tvshows" data-icon="custom-tvshows" id="page_tvshows">Tv Shows</a></li>
+        		<li><a href="?movies" data-icon="custom-movies" id="page_movies">Movies</a></li>
+        		<li><a href="?settings" data-icon="custom-settings" id="page_settings">Settings</a></li>
       		</ul>
     	</div>
 	</div>

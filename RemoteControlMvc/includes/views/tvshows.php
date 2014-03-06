@@ -4,13 +4,12 @@ render('_header',array('title'=>$title,
 			'rurl'		=> $rurl));?>
 <?php
 try {
-	//require_once 'settings.php';
 	if (HostsManager::IsConnected ()) {
 		//print_r($response);
 		if (isset ( $response ["result"] ["tvshows"] ))
 			foreach ( $response ["result"] ["tvshows"] as $tvshow ) {
 				?>
-<div class="swiper-slide">
+<div>
 	<h2>
 		<a href="#" class="xbmcAction"
             data-method="Player.Open"
