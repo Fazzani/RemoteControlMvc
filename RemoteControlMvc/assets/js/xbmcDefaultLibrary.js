@@ -215,7 +215,7 @@ $(function () {
             $('#statusbar').removeClass('bottomstatusbaractive');
         },
         showFooter: function () {
-        	console.log('show');
+        	//console.log('show');
             $('#nowPlayingPanel').show();
             $("#statusbar").animate({ height: "20%" }, 500);
             $('#statusbar').addClass('bottomstatusbaractive');
@@ -441,7 +441,7 @@ $(function () {
                     var imgPath = xbmc.core.DEFAULT_VIDEO_COVER;
                     if (that.activePlaylistItem.thumbnail) {
                     	if(that.ischannel) 
-                    		imgPath = 'img/tv.png';
+                    		imgPath = 'assets/img/tv.png';
                     	else
                     		imgPath = rurl + 'image/'  + encodeURI(that.activePlaylistItem.thumbnail);
                     }
