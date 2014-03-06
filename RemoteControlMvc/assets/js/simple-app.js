@@ -1,11 +1,18 @@
 $(function() {
-	var configpopup = $("#hostconfigpopup");
-	var listConfigPopup = $('#savedconfig');
+	$.mobile.ignoreContentEnabled = true;
+	$.mobile.defaultPageTransition = "turn";
+	$.mobile.pushStateEnabled = false;
 	//$.mobile.ajaxEnabled = false;
-    $.mobile.pushStateEnabled = false;
+    // This second step ensures that the insertion of the new toolbar does not  affect page height
+    //$.mobile.resetActivePageHeight();
 	/**
 	 * Gestion_des_configs***********************************************
 	 */
+    var configpopup = $("#hostconfigpopup");
+	var listConfigPopup = $('#listconfig');
+	configpopup.enhanceWithin().popup();
+	listConfigPopup.enhanceWithin().popup();
+	
 	if (isFirstCnx)
 		configpopup.popup("open");
 
@@ -27,8 +34,9 @@ $(function() {
 			console.log("Request Failed: " + err);
 		});
 	}).on('click', '#add-conf', function(e) {
+		//console.log($("#hostconfigpopup").closest('.ui-page').attr('id'));
 		//Add config
-		configpopup.popup("open");
+		$("#hostconfigpopup").first().popup("open");
 	}).on('click', "#config-item-name", function(e) {
 		//Activate config
 	
@@ -98,15 +106,20 @@ $(function() {
  */
 $(document).on('mobileinit', function () {
 	   // settings
-	   $.mobile.ignoreContentEnabled = true;
-	   $.mobile.defaultPageTransition = "turn";
+	   
 	}).on('pagecreate', function(event){
+		$(this).on('click', '#add-conf', function(e) {
+			console.log($("#hostconfigpopup").length);
+			//Add config
+			$("#hostconfigpopup").last().popup("open");
+		});
+		
+		$('div#mainheader').filter('a').not(".ui-state-persist" ).removeClass( $.mobile.activeBtnClass );
+		$("div#mainheader a[id='" + event.target.id + "']").addClass( $.mobile.activeBtnClass );
 		
 	  $('div.ui-page').on("swipeleft", function (e) {
 		  e.stopImmediatePropagation();
 		  var idpage = $(this).attr('id');
-		  if(idpage=='home')
-			  idpage='homee';
 		  href = $("div.ui-navbar a[id='" + idpage + "']").parent().next().children().attr('href');
 		  //console.log(href);
 		  if (href.length > 0) {
@@ -117,12 +130,11 @@ $(document).on('mobileinit', function () {
 	  $('div.ui-page').on("swiperight", function (e) {
 		  e.stopImmediatePropagation();
 		  var idpage = $(this).attr('id');
-		  if(idpage=='home')
-			  idpage='homee';
 		  href = $("div.ui-navbar a[id='" + idpage + "']").parent().prev().children().attr('href');
 		  //console.log(href);
 		  if (href.length > 0) {
 			  $.mobile.changePage(href,{ transition: "slide", changeHash: false});
 		  }
 	  });
+	  
 	});

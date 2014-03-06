@@ -1,3 +1,5 @@
+   </div>
+	     </div>
 	   <div id="statusbar">
       <div
          style="display: none; height: 100%"
@@ -67,11 +69,11 @@
       data-role="popup"
       data-theme="b"
       data-overlay-theme="a"
-      class="ui-content"
+
       data-transition="turn"
    >
 <!--    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a> -->
-      <h4>Les paramètres de la hôte XBMC</h4>
+      <h4>Les paramÃ¨tres de la hÃ´te XBMC</h4>
       <form 
          action="includes/config.php"
          method="post"
@@ -139,8 +141,7 @@
  	  id="listconfig"
       data-role="popup"
       data-theme="b"
-      data-overlay-theme="a"
-      class="ui-content"
+      data-overlay-theme="b"
       data-transition="turn"
    >
       <p>Les configurations XBMC :</p>
@@ -160,8 +161,7 @@
    ?>
       </form>
    </div>
-   </div>
-   </div>
+
 </body>
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>

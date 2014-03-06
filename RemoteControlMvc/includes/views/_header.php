@@ -74,20 +74,20 @@ console.log('isFirstCnx : ' + isFirstCnx);
 console.log('isConnected : ' + isConnected);
 </script>
 </head>
-<body class="cbp-spmenu-push"> 
+<body> 
 
-<div data-role="page" data-theme="b" id="<?php echo strtolower(str_replace(" ","",$title))?>">
+<div data-role="page" data-theme="b" id="page_<?php echo strtolower(str_replace(" ","",$title))?>">
 
-	<div data-role="header" data-theme="b" data-position="fixed" data-id="mainheader">
+	<div data-role="header" data-theme="b" data-position="fixed" data-id="PersistentHeader">
 <!-- 	    <a href="./" data-icon="home" data-iconpos="notext" data-transition="fade">Home</a> <h1></h1>-->
 		
-		<div data-role="navbar">
+		<div data-role="navbar" id="mainheader">
       		<ul>
-        		<li><a href="./" class="ui-btn-active " data-icon="home" data-transition="flow" id="homee">Home</a></li>
-        		<li><a href="?livetv=0" data-icon="bars" data-transition="flow" id="livetv">Live Tv</a></li>
-        		<li><a href="?tvshows=0" data-icon="camera" data-transition="flow" id="tvshows">Tv Shows</a></li>
-        		<li><a href="?movies=0" data-icon="video" data-transition="flow" id="movies">Movies</a></li>
-        		<li><a href="?settings=0" data-icon="gear" data-transition="flow" id="settings">Settings</a></li>
+        		<li><a href="./" data-icon="home" data-transition="flow" id="page_home">Home</a></li>
+        		<li><a href="?livetv" data-icon="bars" data-transition="flow" id="page_livetv">Live Tv</a></li>
+        		<li><a href="?tvshows" data-icon="camera" data-transition="flow" id="page_tvshows">Tv Shows</a></li>
+        		<li><a href="?movies" data-icon="video" data-transition="flow" id="page_movies">Movies</a></li>
+        		<li><a href="?settings" data-icon="gear" data-transition="flow" id="page_settings">Settings</a></li>
       		</ul>
     	</div>
 	</div>

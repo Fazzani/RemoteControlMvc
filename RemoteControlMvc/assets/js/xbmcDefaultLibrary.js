@@ -600,53 +600,7 @@ $(function () {
     // View changed at XBMC
     var viewChangedEvent = jQuery.Event("viewChanged");
     var notConnectedEvent = jQuery.Event("connectionLoosed");
-//    $('body').bind("viewChanged", function (e) {
-//        if (e.currentWindow == 12005)// FullScreen vidÃƒÂ©o
-//        {
-//            $('#osd').show();
-//            $('#select').hide();
-//        } else {
-//            $('#osd').hide();
-//            $('#select').show();
-//        }
-//
-//        // console.log('currentWindow changed : ' +
-//        // e.currentWindow);
-//        // console.log('currentControl changed : ' +
-//        // e.currentControl);
-//    });
-//
-//     setInterval(function () {
-//     $.getJSON('inputExecuteAction.php?id=1&request=guiGetProperties'
-//     ).done(function (data) {
-//     var obj = $.parseJSON(JSON.stringify(data));
-//     if (obj.error)
-//    	 console.log(obj.error.message);
-//     else {
-//    	 if(currentWindow!=obj.result.currentwindow.id)
-//    	 {
-//    		 viewChangedEvent.currentWindow = currentWindow;
-//    		 viewChangedEvent.currentControl = currentControl;
-//    		 $('body').trigger(viewChangedEvent);
-//    		 currentWindow = obj.result.currentwindow.id;
-//    		 if (obj.result.currentwindow.id >= 10600 &&
-//    				 obj.result.currentwindow.id < 11000)
-//    			 obj.result.currentwindow.label = "Pvr";
-//    		 if (obj.result.currentcontrol.label != '') {
-//    			 currentControl = obj.result.currentcontrol.Id;
-//    			 $('#statusbar').html("<b>"+obj.result.currentwindow.label
-//    				 + "</b> => " + obj.result.currentcontrol.label);
-//    		 }
-//    		 else
-//    			 $('#statusbar').html(obj.result.currentwindow.label);
-//    	 	}
-//    	 }
-//     }).fail(function (data) {
-//    	 var obj = $.parseJSON(JSON.stringify(data.responseText.replace('$daurl', '')));
-//    	 console.log(obj.error);
-//     	});
-//     }, IntervalRefresh);
-//     
+
      var isExectingPingCmd = false;
      setInterval(function () {
     	 if(!isExectingPingCmd)
@@ -676,45 +630,11 @@ $(function () {
             cid = $(this);
             $.getJSON('inputExecuteAction.php?id=1&action=' + cid.attr("id")).done(function (data) {
                 // console.log("success " + cid.attr("id"));
-
-                // var obj =
-                // $.parseJSON(JSON.stringify(data));
-                // if (cid.attr("id") == "play") {
-                // console.log(obj.result.speed);
-                // if (obj.result.speed == 1) {
-                // $("#play").attr("src", "img/pause.png");
-                // $("#play").attr("id", "pause");
-                // $("#rewind").attr("src", "img/rw.png");
-                // $("#fastforward").attr("src",
-                // "img/ff.png");
-                // }
-                // } else if (cid.attr("id") == "pause") {
-                // console.log(obj.result.speed);
-                // if (obj.result.speed == 0) {
-                // $("#pause").attr("src", "img/play.png");
-                // $("#pause").attr("id", "play");
-                // }
-                // }
-                // if (cid.attr("id") == "rewind" ||
-                // cid.attr("id") == "fastforward") {
-                // console.log("rewind");
-                // if (cid.attr("id") == "rewind") {
-                // cid.attr("src", "img/rwred.png");
-                // } else if (cid.attr("id") ==
-                // "fastforward") {
-                // cid.attr("src", "img/ffred.png");
-                // }
-                // $("#play").attr("src", "img/play.png");
-                // $("#pause").attr("src", "img/play.png");
-                // $("#play").attr("id", "play");
-                // $("#pause").attr("id", "play");
-                // }
             }).fail(function () {
                 console.log("error");
             });
         })
         .on('click','.xbmcSimpleAction',function () {
-                    // console.log(".xbmcSimpleAction");
                     $.getJSON('inputExecuteAction.php?id=1&action=' + $(this).attr('data-action'))
                             .done(function (data) {
                                 var obj = $.parseJSON(JSON.stringify(data));
@@ -729,7 +649,6 @@ $(function () {
 
                 })
         .on('click', '.xbmcAction', function () {
-                    // console.log(".xbmcAction");
                     $.getJSON('inputExecuteAction.php?id=1&method=' + $(this).attr('data-method') + "&param=" + $(this).attr('data-params'))
                             .done(
                                     function (data) {
