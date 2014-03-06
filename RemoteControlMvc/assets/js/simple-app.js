@@ -1,3 +1,6 @@
+jQuery.fn.reset = function () {
+  $(this).each (function() { this.reset(); });
+}
 $(function() {
 	$.mobile.ignoreContentEnabled = true;
 	$.mobile.defaultPageTransition = "flow";
@@ -24,7 +27,7 @@ $(function() {
 		listConfigPopup.popup("open");
 	}).on('click', 'a[data-rel]', function(e) {
 		e.preventDefault();
-		console.log('delete item : ' + $(this).attr('data-rel'));
+		//console.log('delete item : ' + $(this).attr('data-rel'));
 		var val = $.getJSON($(this).attr('data-rel')).done(function(json) {
 			if (json.status == 'ok')
 				document.location = 'http://' + window.location.host + window.location.pathname;
@@ -36,6 +39,7 @@ $(function() {
 	}).on('click', '#add-conf', function(e) {
 		//console.log($("#hostconfigpopup").closest('.ui-page').attr('id'));
 		//Add config
+		configpopup.find('form').reset();
 		$("#hostconfigpopup").first().popup("open");
 	}).on('click', "#config-item-name", function(e) {
 		//Activate config
@@ -62,7 +66,7 @@ $(function() {
 		$("#hostconfigpopup").popup("open");
 	}).on('click', ".config_select", function(e) {
 		//Modif config
-		console.log($(this).attr('data-val'));
+		//console.log($(this).attr('data-val'));
 		var val = JSON.parse($(this).attr('data-val'));
 		$('#selectedconfig').val(val.configname);
 		$('form#listconfigform').submit();
@@ -77,6 +81,7 @@ $(function() {
 					document.location = 'http://' + window.location.host + window.location.pathname;
 			}
 		});
+		
 		return false;
 	}).on('click', '#submitSettings', function(e) {
 		$('#configform').submit();
@@ -128,7 +133,12 @@ $(document).on('mobileinit', function () {
 		  e.stopImmediatePropagation();
 		  var idpage = $(this).attr('id');
 		  
-		  href = $("div.ui-navbar a[id='" + idpage + "']").parent().next().children().attr('href');
+		  parentItem = $("div.ui-navbar a[id='" + idpage + "']").parent();
+		  if(parentItem.next().length<=0)
+			  href = parentItem.parent().children().first().children().attr('href');
+		  else
+			  href = parentItem.next().children().attr('href');
+		  
 		  //console.log(href);
 		  if (href.length > 0) {
 			  $.mobile.changePage(href ,{ changeHash: false});
@@ -138,9 +148,15 @@ $(document).on('mobileinit', function () {
 	  $('div.ui-page').on("swiperight", function (e) {
 		  e.stopImmediatePropagation();
 		  var idpage = $(this).attr('id');
-		  href = $("div.ui-navbar a[id='" + idpage + "']").parent().prev().children().attr('href');
+		  
+		  parentItem = $("div.ui-navbar a[id='" + idpage + "']").parent();
+		  if(parentItem.prev().length<=0)
+			  href = parentItem.parent().children().last().children().attr('href');
+		  else
+			  href = parentItem.first().children().attr('href');
+		  
 		  //console.log(href);
-		  if (href.length > 0) {
+		  if (href && href.length > 0) {
 			  $.mobile.changePage(href,{ changeHash: false});
 		  }
 	  });
