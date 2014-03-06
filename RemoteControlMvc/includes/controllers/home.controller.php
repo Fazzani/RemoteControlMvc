@@ -5,7 +5,7 @@
 class HomeController extends  BaseController{
 	public function handleRequest(){
 		render('home',array(
-			'title'		=> 'Welcome to our computer store',
+			'title'		=> 'home',
 			'url'		=> $this->url,
 			'rurl'		=> $this->rurl,
 			'content'	=> ''

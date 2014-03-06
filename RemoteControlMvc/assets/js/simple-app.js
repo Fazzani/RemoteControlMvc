@@ -96,23 +96,33 @@ $(function() {
  * ***********************************************-
  * swiper-*************************************************
  */
-
-$(document).on('pagecreate', function(event){
-	  $('div.ui-page').on("swipeleft", function () {
+$(document).on('mobileinit', function () {
+	   // settings
+	   $.mobile.ignoreContentEnabled = true;
+	   $.mobile.defaultPageTransition = "turn";
+	}).on('pagecreate', function(event){
+		
+	  $('div.ui-page').on("swipeleft", function (e) {
+		  e.stopImmediatePropagation();
 		  var idpage = $(this).attr('id');
+		  if(idpage=='home')
+			  idpage='homee';
 		  href = $("div.ui-navbar a[id='" + idpage + "']").parent().next().children().attr('href');
 		  //console.log(href);
 		  if (href.length > 0) {
-			  $.mobile.changePage(href);
+			  $.mobile.changePage(href ,{ transition: "slide", changeHash: false});
 		  }
 	  });
 
-	  $('div.ui-page').on("swiperight", function () {
+	  $('div.ui-page').on("swiperight", function (e) {
+		  e.stopImmediatePropagation();
 		  var idpage = $(this).attr('id');
+		  if(idpage=='home')
+			  idpage='homee';
 		  href = $("div.ui-navbar a[id='" + idpage + "']").parent().prev().children().attr('href');
 		  //console.log(href);
 		  if (href.length > 0) {
-			  $.mobile.changePage(href);
+			  $.mobile.changePage(href,{ transition: "slide", changeHash: false});
 		  }
 	  });
 	});
