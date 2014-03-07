@@ -118,7 +118,7 @@ $(document).on('mobileinit', function () {
 	   
 	}).on('pagechange', function(event){
 		//Gestion du l'activeState of navBar
-		$('div#mainheader').filter('a').not(".ui-state-persist" ).removeClass( $.mobile.activeBtnClass );
+		$('div#mainheader').find('a').not(".ui-state-persist" ).removeClass( $.mobile.activeBtnClass );
 		if(event.currentTarget.activeElement)
 			$("div#mainheader a[id='" + event.currentTarget.activeElement.id + "']").addClass( $.mobile.activeBtnClass );
 		else
@@ -127,7 +127,7 @@ $(document).on('mobileinit', function () {
 	})
 	.on('pagecreate', function(event){
 		$(this).on('click', '#add-conf', function(e) {
-			console.log($("#hostconfigpopup").length);
+			//console.log($("#hostconfigpopup").length);
 			//Add config
 			$("#hostconfigpopup").last().popup("open");
 		});
