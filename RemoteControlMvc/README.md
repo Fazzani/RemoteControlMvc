@@ -21,8 +21,6 @@ Remote-Control :
 Bugs : 
 ====================
 - Bottom player refresh (Timer and optim).
-- Switch config.
-- Swiper sur Android.
 - Cacher la Popup "list_config" à la détection d'une hôte connectée.
 
 Application Android: 

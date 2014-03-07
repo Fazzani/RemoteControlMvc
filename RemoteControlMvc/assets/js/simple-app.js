@@ -154,10 +154,11 @@ $(document).on('mobileinit', function () {
 		  var idpage = $(this).attr('id');
 		  
 		  parentItem = $("div.ui-navbar a[id='" + idpage + "']").parent();
+		  
 		  if(parentItem.prev().length <= 0)
 			  href = parentItem.parent().children().last().children().attr('href');
 		  else
-			  href = parentItem.first().children().attr('href');
+			  href = parentItem.prev().children().attr('href');
 		  
 		  //console.log(href);
 		  if (href && href.length > 0) {
