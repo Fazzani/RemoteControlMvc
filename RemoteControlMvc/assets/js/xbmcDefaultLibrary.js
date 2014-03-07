@@ -686,8 +686,35 @@ $(function () {
                                         console.log('fail!!!!! the error is : ' + obj.error);
                                     });
 
+                }).on('click', '.nestedList', function () {
+        			var nestedlist = $(this).find('ul#nestedLevel1');
+                    $.getJSON('inputExecuteAction.php?id=1&method=' + $(this).attr('data-method') + "&param=" + $(this).attr('data-params'))
+                            .done(
+                                    function (data) {
+                                    	console.log('.nestedList');
+                                        var obj = $.parseJSON(JSON.stringify(data));
+                                        if (obj.error)
+                                            console.log(obj.error.message);
+                                        else if (obj.result.seasons)
+                                        {
+                                            var html = "";
+                                           
+                                            $.each(obj.result.seasons,
+                                                            function (i, item) {
+                                                                html += "<li><a href=\"#\">" + item.label + "</a></li>";
+                                                            });
+                                            nestedlist.html(html).trigger('create'); 
+                                        }
+                                       
+                                    }).fail(
+                                    function (data) {
+                                        var obj = $.parseJSON(JSON.stringify(data.responseText
+                                                .replace('$daurl', '')));
+
+                                        console.log('fail!!!!! the error is : ' + obj.error);
+                                    });
+
                 });
-    
 //var mediaLibrary = new MediaLibrary(),
 nowPlayingManager = new NowPlayingManager();
 //that = nowPlayingManager;

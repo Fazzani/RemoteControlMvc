@@ -5,10 +5,18 @@ render('_header', array('title'=>$title,
 <?php
 try {
 	if (HostsManager::IsConnected ()) {
-		if (isset ( $response ["result"] ["movies"] ))
+		if (isset ( $response ["result"] ["movies"] ))?>
+		<ul data-role="listview" data-inset="true" data-icon="carat-r" data-filter="true" data-filter-placeholder="Search movies...">
+		<?php
 			foreach ( $response ["result"] ["movies"] as $movie ) {
 				?>
-<div>
+				<li class="ui-btn ui-li ui-li-has-thumb">
+				
+		<img
+			id="poster"
+			class="movie-pic"
+			src="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$movie["art"]["poster"])[1]), 0, -1)));?>"
+		/>
 	<h2>
 		<a
 			href="#"
@@ -17,40 +25,19 @@ try {
 			data-params='{"item":{"movieid":<?= $movie["movieid"]?>}}'
 		> <?= $movie["label"]?></a>
 	</h2>
-	<div class="sidebar">
-		<img
-			id="poster"
-			class="movie-pic"
-			src="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$movie["art"]["poster"])[1]), 0, -1)));?>"
-		/>
-		<div id="details"></div>
-	</div>
-	<div class="descmovie">
-		<div id="year">
-			<p>
-            Year:
+
+		<p class="ui-li-aside">
             <?php echo $movie["year"];?>
-         </p>
-		</div>
-		<div id="rating">
-			<p>
-            Rating:
-            <?php
-				// put filled stars above blank stars and set visiblity to that of rating.
-				$starNumber = round ( $movie ["rating"], 1 );
-				echo $starNumber . '</p>';
-				echo '<div style="z-index: 1;"><img style="z-index: 1;" src="assets/img/stars_empty.png" /></div>';
-				$fullwidth = 160 * $starNumber / 10.0;
-				echo '<div style="z-index: 2; width:' . $fullwidth . 'px; overflow:hidden;"> <img src="assets/img/stars_full.png" /></div>';
-				?>
-		</div>
-	</div>
-	<div class="movie-text">
+		</p>
+		
+	<p class="ui-li-desc">
       <?= $movie["plot"]?>
-   </div>
-</div>
+   </p>
+</li>
 <?php
-			}
+			}?>
+			</ul>
+			<?php 
 	}
 } catch ( Exception $e ) {
 print_r($e);
