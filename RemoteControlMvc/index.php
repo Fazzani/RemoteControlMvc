@@ -21,10 +21,6 @@ try {
 	else if(isset($_GET['livetv'])){
 		$c = new LiveTvController();
 	}
-
-	// 	if($_GET['category']){
-	// 		$c = new CategoryController();
-	// 	}
 	else if(empty($_GET)){
 		$c = new HomeController();
 	}
