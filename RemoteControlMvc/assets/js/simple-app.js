@@ -5,6 +5,10 @@ $(function() {
 	$.mobile.ignoreContentEnabled = true;
 	$.mobile.defaultPageTransition = "flow";
 	$.mobile.pushStateEnabled = false;
+	$.event.special.swipe.scrollSupressionThreshold =10;// More than this horizontal displacement, and we will suppress scrolling.
+	$.event.special.swipe.horizontalDistanceThreshold =30;// Swipe horizontal displacement must be more than this.
+	$.event.special.swipe.durationThreshold =500;// More time than this, and it isn't a swipe.
+	$.event.special.swipe.verticalDistanceThreshold =75;
 	//$.mobile.ajaxEnabled = false;
     // This second step ensures that the insertion of the new toolbar does not  affect page height
     //$.mobile.resetActivePageHeight();
@@ -134,7 +138,7 @@ $(document).on('mobileinit', function () {
 		  var idpage = $(this).attr('id');
 		  
 		  parentItem = $("div.ui-navbar a[id='" + idpage + "']").parent();
-		  if(parentItem.next().length<=0)
+		  if(parentItem.next().length <= 0)
 			  href = parentItem.parent().children().first().children().attr('href');
 		  else
 			  href = parentItem.next().children().attr('href');
@@ -150,7 +154,7 @@ $(document).on('mobileinit', function () {
 		  var idpage = $(this).attr('id');
 		  
 		  parentItem = $("div.ui-navbar a[id='" + idpage + "']").parent();
-		  if(parentItem.prev().length<=0)
+		  if(parentItem.prev().length <= 0)
 			  href = parentItem.parent().children().last().children().attr('href');
 		  else
 			  href = parentItem.first().children().attr('href');
