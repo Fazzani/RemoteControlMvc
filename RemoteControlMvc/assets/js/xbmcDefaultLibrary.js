@@ -721,3 +721,76 @@ nowPlayingManager = new NowPlayingManager();
 //xbmc.core.applyDeviceFixes();
 		}
 });
+
+//var loadNestList = function (me) {
+//	$me=$(me);
+//	var html = "";
+//	//var nestedlist = $me.find('ul#nestedLevel1');
+//	 $.ajax({
+//		  url: 'inputExecuteAction.php?id=1&method=' + $me.attr('data-method') + "&param=" + $me.attr('data-params'),
+//		  dataType: 'json',
+//		  async: false,
+//		  success: function(data) {
+//                        var obj = $.parseJSON(JSON.stringify(data));
+//                        if (obj.error)
+//                            console.log(obj.error.message);
+//                        else if (obj.result.seasons)
+//                        {
+//                            $.each(obj.result.seasons,
+//                                            function (i, item) {
+//                                                html += "<li><a href=\"#\">" + item.label + "</a></li>";
+//                                            });
+//                            
+//                            //nestedlist.html(html).trigger('create'); 
+//                        }
+//                       
+//		  }, error:function (data) {
+//              var obj = $.parseJSON(JSON.stringify(data.responseText
+//                      .replace('$daurl', '')));
+//
+//              console.log('fail!!!!! the error is : ' + obj.error);
+//          }
+//		});
+//    return html;
+//};
+//(function( $, window, undefined ) {
+//	$.mobile.document.on("pagecreate", "div", function(){
+//		$("ul>li>ul").css("display","none");
+//		$("ul>li>ul").parent().addClass("ui-btn ui-btn-icon-right ui-icon-carat-r");
+//	});
+//	$.mobile.document.on( "click", ".ui-listview>li", function(){
+//		if( $(this).children( "ul" ).length == 0 ) {
+//			return;
+//		}
+//		 var li = "<a class='ui-btn ui-corner-all ui-btn-icon-left ui-icon ui-icon-back ui-icon-shadow' data-rel='back'>back</a>" + eval($(this).attr("data-func")+"(this)");
+//		 var currentPage = $(this).closest(".ui-page-active").clone().uniqueId(),
+//		 nestedList  = $( this ).children("ul").clone().attr( "data-" + $.mobile.ns + "role", "listview" ).css("display","block");
+//		 currentPage.attr( "id" , currentPage.attr( "id" ) +"-nested");
+//		 pageID = currentPage.attr( "id" );
+//		 
+//		 currentPage.find("div.ui-content").html(nestedList.html(li));
+//		 $.mobile.pageContainer.append(currentPage);
+//		 currentPage.find( ":jqmData(role=listview)" ).listview();
+//		 currentPage.find("a:jqmData(rel='back')").jqmData("iconpos", "notext");
+//		 currentPage.page();
+//		 
+//		// $.mobile.pageContainer.append(currentPage);
+//		 
+//		 //nestedList.closest(":jqmData(role='page')").trigger('pagecreate');
+//		// currentPage.trigger('create');
+//		 $.mobile.changePage(currentPage, {dataUrl : $(this).attr('data-url'), changeHash : true} );
+//		 
+//		 //li.listview('refresh');
+//		// $.mobile.resetActivePageHeight();
+//		 
+//		// Remove Nested Page
+//		$.mobile.document.one( "pagechange", function(){
+//			$.mobile.document.one( "pagechange", function(){
+//				$.mobile.document.one( "pagechange", function(){
+//					$( "#" + pageID).remove();
+//				});
+//			});
+//		});
+//		
+//	});
+//})( jQuery, this );

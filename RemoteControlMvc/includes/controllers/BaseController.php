@@ -57,7 +57,10 @@ class BaseController{
 	const livetvChannels = '{"jsonrpc":"2.0","id":1,"method":"PVR.GetChannels","params":{"channelgroupid":"alltv"}}';
 	const livetvgroups = '{"jsonrpc":"2.0","id":1,"method":"PVR.GetChannelGroups","params":{"channeltype":"tv"}}';
 	const jsonrpcping = '{"jsonrpc":"2.0","method":"JSONRPC.Ping","params":{},"id":1}';
-
+	const getSeasons = '{"jsonrpc":"2.0","id":1,"method":"VideoLibrary.GetSeasons","params":{"tvshowid":%s,"properties":["episode","thumbnail","season","showtitle","tvshowid"]}}';
+	const getEpisodes = '{"jsonrpc":"2.0","id":1,"method":"VideoLibrary.GetEpisodes","params":{"tvshowid":%s,"season":%s,"properties":["plot","thumbnail","season","title","tvshowid","episode","playcount","votes","rating"]}}';
+	
+    //
 	public function getjsonrpc($data, $url, $timeout = 0) {
 		// echo($data);
 		// echo($url);

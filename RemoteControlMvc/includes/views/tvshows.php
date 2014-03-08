@@ -4,34 +4,28 @@ render('_header',array('title'=>$title,
 			'rurl'		=> $rurl));?>
 <?php
 try {
-	if (HostsManager::IsConnected ()) {
-		//print_r($response);
-
-		if (isset ( $response ["result"] ["tvshows"] ))?>
+	if (HostsManager::IsConnected () && array_key_exists("tvshows",$response ["result"])) {
+		//print_r($response);?>
 <ul data-role="listview" data-inset="true" data-icon="carat-r" data-filter="true" data-filter-placeholder="Search Tv shows...">
 			<?php foreach ( $response ["result"] ["tvshows"] as $tvshow ) {
 				?>
-<li class="nestedList ui-btn ui-li ui-li-has-thumb" data-method="VideoLibrary.GetSeasons"  data-params='{"tvshowid":<?= $tvshow["tvshowid"]?>}'>
+<li data-url="?tvshowid=<?= $tvshow['tvshowid']?>" class=" ui-btn ui-li ui-li-has-thumb" data-method="VideoLibrary.GetSeasons" data-func="loadNestList" data-params='{"tvshowid":<?= $tvshow["tvshowid"]?>}'>
+<a href="?tvshows=<?= $tvshow['tvshowid']?>">
 	<img
-		src="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$tvshow["art"]["poster"])[1]), 0, -1)));?>"
+		src="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$tvshow["thumbnail"])[1]), 0, -1)));?>"
 		height="200"
 		width="200"
 		alt=""
 	/>
 	<h2>
-		<a href="#" class="xbmcAction"
-            data-method="Player.Open"
-            data-params='{"item":{"tvshowid":<?= $tvshow["tvshowid"]?>}}'>
-	<?= $tvshow["label"]?></a>
+	<?= $tvshow["label"]?>
 	</h2>
 	<p class="ui-li-aside">
             <?php echo $tvshow["year"];?>
 		</p>
 	<p class="ui-li-desc"><?= $tvshow["plot"]?></p>
-	<ul id="nestedLevel1">
-		<li>
-		</li>
-	</ul>
+	
+	</a>
 </li>
 <?php
 			}?>

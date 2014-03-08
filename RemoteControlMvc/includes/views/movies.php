@@ -1,46 +1,53 @@
-<?php 
-render('_header', array('title'=>$title,
-			'url'		=> $url,
-			'rurl'		=> $rurl));?>
 <?php
+render ( '_header', array (
+		'title' => $title,
+		'url' => $url,
+		'rurl' => $rurl 
+) );
+?>
+<?php
+
 try {
-	if (HostsManager::IsConnected ()) {
-		if (isset ( $response ["result"] ["movies"] ))?>
-		<ul data-role="listview" data-inset="true" data-icon="carat-r" data-filter="true" data-filter-placeholder="Search movies...">
+	if (HostsManager::IsConnected () && array_key_exists("movies",$response ["result"])) {
+			?>
+<ul
+	data-role="listview"
+	data-inset="true"
+	data-icon="carat-r"
+	data-filter="true"
+	data-filter-placeholder="Search movies..."
+>
 		<?php
-			foreach ( $response ["result"] ["movies"] as $movie ) {
-				?>
-				<li class="ui-btn ui-li ui-li-has-thumb">
-				
-		<img
+		foreach ( $response ["result"] ["movies"] as $movie ) {
+			?>
+				<li class="ui-btn ui-li ui-li-has-thumb"><a
+		href="#"
+		class="xbmcAction"
+		data-method="Player.Open"
+		data-params='{"item":{"movieid":<?= $movie["movieid"]?>}}'
+	> <img
 			id="poster"
 			class="movie-pic"
 			src="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$movie["art"]["poster"])[1]), 0, -1)));?>"
 		/>
-	<h2>
-		<a
-			href="#"
-			class="xbmcAction"
-			data-method="Player.Open"
-			data-params='{"item":{"movieid":<?= $movie["movieid"]?>}}'
-		> <?= $movie["label"]?></a>
+			<h2>
+		 <?= $movie["label"]?>
 	</h2>
-
-		<p class="ui-li-aside">
+			<p class="ui-li-aside">
             <?php echo $movie["year"];?>
 		</p>
-		
-	<p class="ui-li-desc">
+			<p class="ui-li-desc">
       <?= $movie["plot"]?>
    </p>
-</li>
+	</a></li>
 <?php
-			}?>
+		}
+		?>
 			</ul>
-			<?php 
+<?php
 	}
 } catch ( Exception $e ) {
-print_r($e);
+	print_r ( $e );
 }
 ?>
 <?php render('_footer');?>

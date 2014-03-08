@@ -166,6 +166,7 @@
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 <script src="assets/js/simple-app.js"></script>
+
 <script
    type="text/javascript"
    src="assets/js/xbmcDefaultLibrary.js"
@@ -174,5 +175,4 @@
    type="text/javascript"
    src="assets/js/MediaLibrary.js"
 ></script>
-
 </html>

@@ -3,8 +3,8 @@ render('_header',array('title'=>$title,
 			'url'		=> $url,
 			'rurl'		=> $rurl));?>
 <?php
-if (HostsManager::IsConnected()) {
-	?>
+if (HostsManager::IsConnected () && array_key_exists("channelgroups",$responsegroup ["result"]) ) {
+		?>
 <div id="leftsystem">
    <ul data-role="listview" data-inset="true">
       <?php foreach ($responsegroup["result"]["channelgroups"] as $group){?>

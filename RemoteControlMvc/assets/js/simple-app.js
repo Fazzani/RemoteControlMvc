@@ -3,6 +3,7 @@ jQuery.fn.reset = function () {
 }
 $(function() {
 	$.mobile.ignoreContentEnabled = true;
+	$.mobile.hashListeningEnabled = true;
 	$.mobile.defaultPageTransition = "flow";
 	$.mobile.pushStateEnabled = false;
 	$.event.special.swipe.scrollSupressionThreshold =10;// More than this horizontal displacement, and we will suppress scrolling.

@@ -69,7 +69,7 @@ console.log('isConnected : ' + isConnected);
 
 <div data-role="page" data-theme="b" id="page_<?php echo strtolower(str_replace(" ","",$title))?>">
 
-	<div data-role="header" data-theme="b" data-position="fixed" data-id="PersistentHeader">
+	<div data-role="header" data-position="fixed">
 <!-- 	    <a href="./" data-icon="home" data-iconpos="notext" data-transition="fade">Home</a> <h1></h1>-->
 		
 		<div data-role="navbar" id="mainheader">
