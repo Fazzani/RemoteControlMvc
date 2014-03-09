@@ -242,6 +242,7 @@ a#contextmenu {
 
 tr.headerRemote td {
  height: 20%;
+ padding-bottom:12%;
 }
 
 .roundbutton:active {
@@ -275,7 +276,7 @@ tr.bodyRemote {
 table.remotetable {
  width: 100%;
  font-size: 0px;
- padding-top: 12%;
+ padding-top: 10%;
 }
 
 tr.headerRemote {
