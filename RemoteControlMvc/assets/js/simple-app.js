@@ -11,8 +11,8 @@ $(function() {
 	$.event.special.swipe.durationThreshold = 500;// More time than this, and it isn't a swipe.
 	$.event.special.swipe.verticalDistanceThreshold =75;
 	//$.mobile.ajaxEnabled = false;
-    // This second step ensures that the insertion of the new toolbar does not  affect page height
-    //$.mobile.resetActivePageHeight();
+	//This second step ensures that the insertion of the new toolbar does not  affect page height
+        //$.mobile.resetActivePageHeight();
 	/**
 	 * Gestion_des_configs***********************************************
 	 */
@@ -165,6 +165,6 @@ $(document).on('mobileinit', function () {
 		  if (href && href.length > 0) {
 			  $.mobile.changePage(href,{ changeHash: false});
 		  }
-	  });
-	  
+	    	  });
+
 	});
