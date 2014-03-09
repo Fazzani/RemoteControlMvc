@@ -3,7 +3,7 @@ render('_header',array('title'=>$title,
 			'url'		=> $url,
 			'rurl'		=> $rurl));?>
 
-<div id="box">
+
    <table class="remotetable">
       <tr class="headerRemote">
          <td colspan="2"><div id="bh">
@@ -22,7 +22,7 @@ render('_header',array('title'=>$title,
                      class="lruds roundbutton xbmcAction"
                   /> <img
                      src="assets/img/video.png"
-                     alt="Vidéo"
+                     alt="Vidï¿½o"
                      data-method="GUI.ActivateWindow"
                      data-params='{"window":"video"}'
                      class="lruds roundbutton xbmcAction"
@@ -228,7 +228,7 @@ render('_header',array('title'=>$title,
       
    </table>
   
-</div>
+
 
 
 <?php render('_footer')?>
