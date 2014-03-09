@@ -8,8 +8,8 @@ render ( '_header', array (
 <?php
 
 try {
-	if (HostsManager::IsConnected () && array_key_exists("movies",$response ["result"])) {
-			?>
+	if (HostsManager::IsConnected () && array_key_exists ( "movies", $response ["result"] )) {
+		?>
 <ul
 	data-role="listview"
 	data-inset="true"
@@ -17,9 +17,7 @@ try {
 	data-filter="true"
 	data-filter-placeholder="Search movies..."
 >
-		<?php
-		foreach ( $response ["result"] ["movies"] as $movie ) {
-			?>
+		<?php foreach ( $response ["result"] ["movies"] as $movie ) {?>
 				<li class="ui-btn ui-li ui-li-has-thumb"><a
 		href="#"
 		class="xbmcAction"
