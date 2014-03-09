@@ -33,10 +33,6 @@
    rel="stylesheet"
    href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css"
 />
-<link
-   rel="stylesheet"
-   href="assets/css/simple-app.css"
-/>
 <!-- <link -->
 <!--    rel="stylesheet" -->
 <!--    type="text/css" -->
@@ -56,7 +52,6 @@
    language="javascript"
    type="text/javascript"
 >
-
 var isFirstCnx = '<?= HostsManager::isFirstCnx() ?>'=='1' ? true: false;
 var isConnected = '<?= HostsManager::IsConnected() ?>'=='1' ? true: false;
 var rurl = '<?php echo($rurl); ?>';	

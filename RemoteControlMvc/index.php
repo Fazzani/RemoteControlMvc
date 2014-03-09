@@ -29,6 +29,6 @@ try {
 	$c->handleRequest();
 }
 catch(Exception $e) {
-	render('error',array('message'=>$e->getMessage()));
+	render('error', array('message'=>$e->getMessage()));
 }
 ?>
