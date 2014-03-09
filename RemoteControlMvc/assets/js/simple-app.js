@@ -5,7 +5,21 @@ jQuery.fn.reset = function() {
 };
 
 $(function() {
-   
+    $.mobile.ignoreContentEnabled = true;
+    $.mobile.hashListeningEnabled = true;
+    $.mobile.defaultPageTransition = "flow";
+    $.mobile.pushStateEnabled = false;
+    $.event.special.swipe.scrollSupressionThreshold = 10;
+    // More than this horizontal displacement, and we will suppress scrolling.
+    $.event.special.swipe.horizontalDistanceThreshold = 30;
+    // Swipe horizontal displacement must be more than this.
+    $.event.special.swipe.durationThreshold = 500;
+    // More time than this, and it isn't a swipe.
+    $.event.special.swipe.verticalDistanceThreshold = 75;
+    // $.mobile.ajaxEnabled = false;
+    // This second step ensures that the insertion of the new toolbar does not
+    // affect page height
+    // $.mobile.resetActivePageHeight();
     /**
      * Gestion_des_configs***********************************************
      */
@@ -87,6 +101,7 @@ $(function() {
 	$('#configform').submit();
 	return false;
     });
+
     /**
      * ********************************************- LocalStorage
      * -*************************************************
@@ -109,31 +124,9 @@ $(function() {
  * swiper-*************************************************
  */
 $(document).on('mobileinit', function() {
-    //$.mobile.loader.prototype.options.text = "loading";
-    //$.mobile.loader.prototype.options.textVisible = true;
-    //$.mobile.loader.prototype.options.theme = "a";
-    $.mobile.loader.prototype.options.html = "<span class='ui-corner-all ui-loader' data-defaults='false'><img src='assets/img/loader.gif' /></span>";
-    $.mobile.pageLoadErrorMessage = 'Error';
-    $.mobile.ignoreContentEnabled = true;
-    $.mobile.hashListeningEnabled = true;
-    $.mobile.defaultPageTransition = "flow";
-    $.mobile.pushStateEnabled = false;
-   
-    //$( ".ui-loader" ).loader( "option", "defaults", true );
-    $.event.special.swipe.scrollSupressionThreshold = 10;
-    // More than this horizontal displacement, and we will suppress scrolling.
-    $.event.special.swipe.horizontalDistanceThreshold = 30;
-    // Swipe horizontal displacement must be more than this.
-    $.event.special.swipe.durationThreshold = 500;
-    // More time than this, and it isn't a swipe.
-    $.event.special.swipe.verticalDistanceThreshold = 75;
-    // $.mobile.ajaxEnabled = false;
-    // This second step ensures that the insertion of the new toolbar does not
-    // affect page height
-    // $.mobile.resetActivePageHeight();
-   
-}).on( "click", ".show-page-loading-msg", function() {$.mobile.loading( 'show');})
-.on('pagechange', function(event) {
+    // settings
+
+}).on('pagechange', function(event) {
     // Gestion du l'activeState of navBar
     $('div#mainheader').find('a').not(".ui-state-persist").removeClass($.mobile.activeBtnClass);
     if (event.currentTarget.activeElement)
