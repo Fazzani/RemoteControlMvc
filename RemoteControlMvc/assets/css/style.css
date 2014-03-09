@@ -239,6 +239,11 @@ span.actions-config{
     height: auto;
     width: 110px;
 }
+.ui-loader{
+
+  background-color: white;
+}
+
 /*
 	REMOTE
 */
