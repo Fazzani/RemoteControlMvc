@@ -5,12 +5,13 @@ render('_header',array('title'=>$title,
 <?php
 try {
 	if (HostsManager::IsConnected () && array_key_exists("seasons",$response ["result"])) {
+	//print_r($response ["result"] ["seasons"]);
 	?>
 <ul data-role="listview" data-inset="true" data-icon="carat-r">
 			<?php foreach ( $response ["result"] ["seasons"] as $tvshow ) {
 			
 				?>
-<li data-url="?tvshowid=<?= $tvshow['seasonid']?>" class=" ui-btn ui-li ui-li-has-thumb">
+<li data-url="?tvshowid=<?= $tvshow['season']?>" class=" ui-btn ui-li ui-li-has-thumb">
 <a href="?tvshows=<?= $tvshow['tvshowid']?>&season=<?= $tvshow['season']?>">
 	<img
 		src="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$tvshow["thumbnail"])[1]), 0, -1)));?>"
