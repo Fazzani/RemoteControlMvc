@@ -30,8 +30,12 @@ class BaseController{
 
 	
 	const refreshPvr = '{"jsonrpc":"2.0","method":"Addons.SetAddonEnabled","params":{"addonid":"pvr.iptvsimple","enabled":true},"id":25}';
+	const livetvChannels = '{"jsonrpc":"2.0","id":1,"method":"PVR.GetChannels","params":{"channelgroupid":"alltv"}}';
 	const videoLibraryGetTVShows = '{"jsonrpc": "2.0", "method": "VideoLibrary.GetTVShows", "id": 1, "params":{"properties":["art","genre","plot","title","originaltitle","year","rating","thumbnail","playcount","file","fanart","episode"]}}';
-	const videoLibraryGetMovies = '{"jsonrpc": "2.0", "method": "VideoLibrary.GetMovies", "id": 1, "params":{"properties":["art","genre","plot","title","originaltitle","year","rating","thumbnail","playcount","file","fanart"]}}';
+	const getSeasons = '{"jsonrpc":"2.0","id":1,"method":"VideoLibrary.GetSeasons","params":{"tvshowid":%s,"properties":["episode","thumbnail","season","showtitle","tvshowid"]}}';
+	const getEpisodes = '{"jsonrpc":"2.0","id":1,"method":"VideoLibrary.GetEpisodes","params":{"tvshowid":%s,"season":%s,"properties":["plot","thumbnail","season","title","tvshowid","episode","playcount","votes","rating"]}}';
+	const videoLibraryGetMovies = '{"jsonrpc": "2.0", "method": "VideoLibrary.GetMovies", "id": 1, "params":{"properties":["file","title","playcount","resume","year","runtime","lastplayed","thumbnail","plot"]}}';
+	const videoLibraryGetMoviesDetails = '{"jsonrpc": "2.0", "method": "VideoLibrary.GetMovieDetails", "id": 1, "params":{"movieid":%s,"properties":["art","genre","plot","title","originaltitle","year","rating","thumbnail","playcount","file","fanart"]}}';
 	const fileGetDirectory = '{"jsonrpc":"2.0","method":"Files.GetDirectory","id":2,"params":{"directory":"D:\\TV Shows\\30 Rock","properties":["file"]}}'; // directory from above query
 	const filesGetFileDetails = '{"jsonrpc": "2.0", "id": 1, "method": "Files.GetFileDetails", "params":{"file":"D:\\TV Shows\\30 Rock\\Season 7\\30.Rock.S07E06.720p.WEB-DL.DD5.1.H.264-POD.mkv","properties":["size","mimetype","file"]}}';
 	const playerGetActivePlayers = '{"jsonrpc":"2.0","method":"Player.GetActivePlayers","id":1}';
@@ -54,11 +58,9 @@ class BaseController{
 	const inputShowCodec = '{"jsonrpc":"2.0","id":1,"method":"Input.ShowCodec","params":{}}'; // shows codec overlay
 	const xbmcGetInfoLabels = '{"jsonrpc":"2.0","id":1,"method":"XBMC.GetInfoLabels","params":{"labels":["System.TotalSpace"]}}'; // labels can be found here: http://wiki.xbmc.org/index.php?title=InfoLabels
 	const videoLibraryExport = '{"jsonrpc":"2.0","id":1,"method":"VideoLibrary.Export","params":{"options":{"path":"C:\\"}}}';
-	const livetvChannels = '{"jsonrpc":"2.0","id":1,"method":"PVR.GetChannels","params":{"channelgroupid":"alltv"}}';
 	const livetvgroups = '{"jsonrpc":"2.0","id":1,"method":"PVR.GetChannelGroups","params":{"channeltype":"tv"}}';
 	const jsonrpcping = '{"jsonrpc":"2.0","method":"JSONRPC.Ping","params":{},"id":1}';
-	const getSeasons = '{"jsonrpc":"2.0","id":1,"method":"VideoLibrary.GetSeasons","params":{"tvshowid":%s,"properties":["episode","thumbnail","season","showtitle","tvshowid"]}}';
-	const getEpisodes = '{"jsonrpc":"2.0","id":1,"method":"VideoLibrary.GetEpisodes","params":{"tvshowid":%s,"season":%s,"properties":["plot","thumbnail","season","title","tvshowid","episode","playcount","votes","rating"]}}';
+	
 	
     //
 	public function getjsonrpc($data, $url, $timeout = 0) {

@@ -43,6 +43,7 @@
    type="text/css"
    href="assets/css/player.css"
 />
+<link rel="stylesheet" type="text/css" href="assets/flowplayer/skin/minimalist.css">
 <link
    rel="shortcut icon"
    href="favicon.ico"

@@ -102,7 +102,7 @@ $(function () {
     var NowPlayingManager = function () {
         this.init();
         return true;
-    }
+    };
   
     NowPlayingManager.prototype = {
         updateCounter: 0,

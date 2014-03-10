@@ -1,8 +1,8 @@
 <?php
 render ( '_header', array (
-		'title' => $title,
-		'url' => $url,
-		'rurl' => $rurl 
+'title' => $title,
+'url' => $url,
+'rurl' => $rurl
 ) );
 ?>
 <?php
@@ -11,39 +11,35 @@ try {
 	if (HostsManager::IsConnected () && array_key_exists("movies",$response ["result"])) {
 			?>
 <ul
-	data-role="listview"
-	data-inset="true"
-	data-icon="carat-r"
-	data-filter="true"
-	data-filter-placeholder="Search movies..."
+   data-role="listview"
+   data-inset="true"
+   data-icon="carat-r"
+   data-filter="true"
+   data-filter-placeholder="Search movies..."
 >
-		<?php
-		foreach ( $response ["result"] ["movies"] as $movie ) {
+   <?php
+   foreach ( $response ["result"] ["movies"] as $movie ) {
 			?>
-				<li class="ui-btn ui-li ui-li-has-thumb"><a
-		href="#"
-		class="xbmcAction"
-		data-method="Player.Open"
-		data-params='{"item":{"movieid":<?= $movie["movieid"]?>}}'
-	> <img
-			id="poster"
-			class="movie-pic"
-			src="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$movie["art"]["poster"])[1]), 0, -1)));?>"
-		/>
-			<h2>
-		 <?= $movie["label"]?>
-	</h2>
-			<p class="ui-li-aside">
+   <li
+      class="ui-btn ui-li ui-li-has-thumb"
+   ><a href="?movies&movieid=<?= $movie['movieid']?>"><img
+         id="poster"
+         class="movie-pic"
+         src="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$movie["thumbnail"])[1]), 0, -1)));?>"
+      />
+         <h2>
+            <?= $movie["label"]?>
+         </h2>
+         <p class="ui-li-aside">
             <?php echo $movie["year"];?>
-		</p>
-			<p class="ui-li-desc">
-      <?= $movie["plot"]?>
-   </p>
-	</a></li>
-<?php
+         </p>
+         <p class="ui-li-desc">
+            <?= $movie["plot"]?>
+         </p> </a></li>
+   <?php
 		}
 		?>
-			</ul>
+</ul>
 <?php
 	}
 } catch ( Exception $e ) {
