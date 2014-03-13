@@ -88,7 +88,12 @@ $(function() {
 			});
 
 		return false;
-	});
+	})
+	.on("focus",".ui-popup-active input, .ui-popup-active textarea", function () {
+		  $(this).closest('.ui-popup').popup("reposition", {
+		    y: 0 /* move it to top */
+		  });
+		});
 	/**
 	 * ********************************************- LocalStorage
 	 * -*************************************************
