@@ -49,6 +49,9 @@
    href="favicon.ico"
    type="image/x-icon"
 />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 <script
    language="javascript"
    type="text/javascript"
