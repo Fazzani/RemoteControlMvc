@@ -43,7 +43,7 @@
    type="text/css"
    href="assets/css/player.css"
 />
-<link rel="stylesheet" type="text/css" href="assets/flowplayer/skin/minimalist.css">
+<!-- <link rel="stylesheet" type="text/css" href="assets/flowplayer/skin/minimalist.css"> -->
 <link
    rel="shortcut icon"
    href="favicon.ico"
@@ -52,6 +52,7 @@
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+<script src="assets/js/jquery.mobile.lazyloader.min.js"></script>
 <script
    language="javascript"
    type="text/javascript"

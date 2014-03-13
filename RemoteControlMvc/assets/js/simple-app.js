@@ -5,6 +5,8 @@ jQuery.fn.reset = function() {
 };
 
 $(function() {
+	//http://www.appelsiini.net/projects/lazyload
+	
 	//il faut pas la déplacer sinon elle posera un pb pr les popops.
 	$.mobile.pushStateEnabled = false;
 	// .on( "click", ".show-page-loading-msg", function()
@@ -136,9 +138,7 @@ $(function() {
 	// // 'three': 3 }");
 	// }
 });
-$("form").validate({
-    errorContainer: "#invalid"
-});
+
 /**
  * ***********************************************-
  * swiper-*************************************************
@@ -147,11 +147,13 @@ $(document)
 		.on(
 				'mobileinit',
 				function() {
-					
 
 				}).on(
 				'pagechange',
 				function(event) {
+					$("img.lazy").lazyload({
+					    effect : "fadeIn"
+					});
 					// Gestion du l'activeState of navBar
 					$('div#mainheader').find('a').not(".ui-state-persist").removeClass($.mobile.activeBtnClass);
 					if (event.currentTarget.activeElement)
@@ -161,10 +163,10 @@ $(document)
 						$("div#mainheader a[id='page_home']").addClass($.mobile.activeBtnClass);
 
 				}).on('pagecreate', function(event) {
-			$(this).on('click', '#add-conf', function(e) {
-				// console.log($("#hostconfigpopup").length);
-				// Add config
-				$("#hostconfigpopup").last().popup("open");
+					$(this).on('click', '#add-conf', function(e) {
+						// console.log($("#hostconfigpopup").length);
+						// Add config
+						$("#hostconfigpopup").last().popup("open");
 			});
 
 			$('div.ui-page').on("swipeleft", function(e) {
