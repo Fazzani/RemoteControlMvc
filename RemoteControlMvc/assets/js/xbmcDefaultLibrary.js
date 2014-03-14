@@ -600,7 +600,7 @@ $(function () {
     // View changed at XBMC
     var viewChangedEvent = jQuery.Event("viewChanged");
     var notConnectedEvent = jQuery.Event("connectionLoosed");
-
+    var GetBackConnectedEvent = jQuery.Event("GetBackConnectedEvent");
      var isExectingPingCmd = false;
      setInterval(function () {
     	 if(!isExectingPingCmd)
@@ -617,10 +617,18 @@ $(function () {
     			 }
     			 else 
     				 if(obj.result!='pong')
+    				 {
     					 $('body').trigger(notConnectedEvent);
+    				 }
+    				 else
+    				 {
+    					 $('body').trigger(GetBackConnectedEvent);
+    				 }
+    			 
     		 }).fail(function (data) {
     			 isExectingPingCmd = false;
     			 $('body').trigger(notConnectedEvent);
+    			 isNotConnected = true;
          		});
          	}}, 2000);
 

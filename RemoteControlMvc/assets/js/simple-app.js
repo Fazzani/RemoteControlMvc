@@ -24,7 +24,7 @@ $(function() {
 	$.event.special.swipe.scrollSupressionThreshold = 10;
 	// More than this horizontal displacement, and we will
 	// suppress scrolling.
-	$.event.special.swipe.horizontalDistanceThreshold = 30;
+	$.event.special.swipe.horizontalDistanceThreshold = 25;
 	// Swipe horizontal displacement must be more than this.
 	$.event.special.swipe.durationThreshold = 500;
 	// More time than this, and it isn't a swipe.
@@ -49,8 +49,11 @@ $(function() {
 		listConfigPopup.popup("open");
 
 	$("body").on('connectionLoosed', function(e) {
-		console.log('connectionLoosed...');
+		//console.log('connection Loosed...');
 		listConfigPopup.popup("open");
+	}).on('GetBackConnectedEvent', function(e) {
+		//console.log('GetBackConnectedEvent...');
+		listConfigPopup.popup("close");
 	}).on('click', 'a[data-rel]', function(e) {
 		e.preventDefault();
 		// console.log('delete item : ' + $(this).attr('data-rel'));
