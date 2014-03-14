@@ -39,8 +39,8 @@ $(function() {
 	 */
 	var configpopup = $("#hostconfigpopup");
 	var listConfigPopup = $('#listconfig');
-	configpopup.enhanceWithin().popup();
-	listConfigPopup.enhanceWithin().popup();
+	configpopup.enhanceWithin().popup({ history: false });
+	listConfigPopup.enhanceWithin().popup({ history: false });
 
 	if (isFirstCnx)
 		configpopup.popup("open");
@@ -50,10 +50,13 @@ $(function() {
 
 	$("body").on('connectionLoosed', function(e) {
 		//console.log('connection Loosed...');
-		listConfigPopup.popup("open");
+		if(listConfigPopup.closest('.ui-popup-container').hasClass('ui-popup-hidden'))
+				listConfigPopup.popup("open");
 	}).on('GetBackConnectedEvent', function(e) {
 		//console.log('GetBackConnectedEvent...');
-		listConfigPopup.popup("close");
+		if(listConfigPopup.closest('.ui-popup-container').hasClass('ui-popup-active'))
+			listConfigPopup.popup("close");
+		
 	}).on('click', 'a[data-rel]', function(e) {
 		e.preventDefault();
 		// console.log('delete item : ' + $(this).attr('data-rel'));
