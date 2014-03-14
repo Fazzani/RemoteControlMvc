@@ -12,9 +12,11 @@ try {
 <li data-url="?tvshowid=<?= $tvshow['tvshowid']?>" class=" ui-btn ui-li ui-li-has-thumb" data-method="VideoLibrary.GetSeasons" data-func="loadNestList" data-params='{"tvshowid":<?= $tvshow["tvshowid"]?>}'>
 <a href="?tvshows=<?= $tvshow['tvshowid']?>">
 	<img
-		src="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$tvshow["thumbnail"])[1]), 0, -1)));?>"
-		height="200"
-		width="200"
+		src="assets/img/loader-img.gif" 
+		class="lazy"
+		data-original="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$tvshow["thumbnail"])[1]), 0, -1)));?>"
+		height="200px"
+		width="200px"
 		alt=""
 	/>
 	<h2>

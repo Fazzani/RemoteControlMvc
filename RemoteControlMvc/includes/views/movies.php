@@ -23,13 +23,13 @@ try {
    <li
       class="ui-btn ui-li ui-li-has-thumb"
    ><a href="?movies&movieid=<?= $movie['movieid']?>"><img
-   height="80px"
-   width="80px"
-   src="http://code.jquery.com/mobile/1.4.2/images/ajax-loader.gif" 
-         id="poster"
-         class="movie-pic lazy"
-         data-original="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$movie["thumbnail"])[1]), 0, -1)));?>"
-      />
+  		height="80px"
+   		width="80px"
+   		src="assets/img/loader-img.gif" 
+        id="poster"
+        class="movie-pic lazy"
+        data-original="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$movie["thumbnail"])[1]), 0, -1)));?>"
+      	/>
          <h2>
             <?= $movie["label"]?>
          </h2>

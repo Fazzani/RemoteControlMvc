@@ -14,9 +14,11 @@ try {
 <li data-url="?tvshowid=<?= $tvshow['season']?>" class=" ui-btn ui-li ui-li-has-thumb">
 <a href="?tvshows=<?= $tvshow['tvshowid']?>&season=<?= $tvshow['season']?>">
 	<img
-		src="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$tvshow["thumbnail"])[1]), 0, -1)));?>"
-		height="200"
-		width="200"
+		class="lazy"
+		src="assets/img/loader-img.gif" 
+		data-original="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$tvshow["thumbnail"])[1]), 0, -1)));?>"
+		height="200px"
+		width="200px"
 		alt=""
 	/>
 	<h2>
