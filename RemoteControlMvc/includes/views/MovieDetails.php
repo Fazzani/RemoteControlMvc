@@ -9,72 +9,58 @@ render ( '_header', array (
 
 try {
 ?>
-<div id="detailsMovie">
-   <video
-      id="movie"
-      width="200"
-      height="200"
-      preload
-      controls
-      poster="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$response["thumbnail"])[1]), 0, -1)));?>"
-   >
-      <object
-         classid="clsid:67DABFBF-D0AB-41fa-9C46-CC0F21721616"
-         width="320"
-         height="260"
-         codebase="http://go.divx.com/plugin/DivXBrowserPlugin.cab"
-      >
-         <param
-            name="custommode"
-            value="none"
-         />
-         <param
-            name="previewImage"
-            value="<?= $response["file"]?>"
-         />
-         <param
-            name="autoPlay"
-            value="false"
-         />
-         <param
-            name="src"
-            value="<?= $response["file"]?>"
-         />
-         <object
-            type="application/x-vlc-plugin"
-            pluginspage="http://www.videolan.org"
-            data="<?= $response["file"]?>"
-            width="400"
-            height="300"
-            id="video1"
-         >
-            <param
-               name="movie"
-               value="<?= $response["file"]?>"
-            />
-            <embed
-               type="application/x-vlc-plugin"
-               name="video1"
-               autoplay="no"
-               loop="no"
-               width="400"
-               height="300"
-               target="<?= $response["file"]?>"
-            />
-         </object>
-      </object>
-      <?= $response["label"]?>
-   </video>
-   <h2>
-      <?= $response["label"]?>
-   </h2>
-   
-   <p class="ui-li-aside">
-      <?php echo $response["year"];?>
-   </p>
-   <p class="ui-li-desc">
-      <?= $response["plot"]?>
-   </p>
+<div
+   id="detailsMovie"
+   style="position: relative;"
+>
+   <img
+      width="100%"
+      height="100%"
+      style="opacity: 0.5;"
+      src="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$response["thumbnail"])[1]), 0, -1)));?>"
+   > </img>
+   <div class="detailMovie">
+      <div>
+         <h2 class="inline-title">
+            <?= $response["label"]?>
+         </h2>
+         <span class="ui-mini">(<?= $response["originaltitle"]?>) <span class="right-position midium-title"> <?php echo $response["year"];?>
+         </span>
+      
+      </div>
+      <div>
+         </span> <span class="midium-title">Genre :</span>
+         <?php
+   foreach ( $response["genre"] as $genre ) {?>
+         <span><?= $genre?> </span>
+         <?php }
+         ?>
+      </div>
+      <div>
+         </span> <span class="midium-title">Réalisateurs :</span>
+         <?php
+   foreach ( $response["director"] as $director ) {?>
+         <span><?= $director?> </span>
+         <?php }
+         ?>
+      </div>
+      <div >
+         <?php
+   foreach ( $response["cast"] as $cast ) {?>
+   <div class="cast-bloc">
+         <img width="100%" height="80%"  class="ui-corner-all ui-shadow"
+            src="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$cast["thumbnail"])[1]), 0, -1)));?>"
+         > </img>
+         <p class="ui-mini"><?= $cast["name"]?> </p>
+         </div>
+         <?php }
+         ?>
+      </div>
+      <div class="ui-body ui-body-b ui-corner-all">
+         <h3 class="ui-bar ui-bar-b">Résumé</h3>
+         <p><?= $response["plot"]?></p>
+      </div>
+   </div>
 </div>
 <?php
 } catch ( Exception $e ) {
@@ -82,17 +68,3 @@ try {
 }
 ?>
 <?php render('_footer');?>
-<script
-   type="text/javascript"
-   src="assets/flowplayer/flowplayer.min.js"
-></script>
-<script>
-  var v = document.getElementById("movie");
-  v.onclick = function() {
-    if (v.paused) {
-      v.play();
-    } else {
-      v.pause();
-    }
-  };
-</script>

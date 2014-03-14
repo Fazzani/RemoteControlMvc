@@ -269,6 +269,43 @@ input:required:valid {
 label.error {
 	display: none !important;
 }
+
+.detailMovie {
+	padding: 2%;
+	text-align: left;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	background-color: #212121;
+	opacity: 0.8;
+	box-shadow: -7px 5px 11px #000000;
+	text-align: left;
+	height: 100%;
+}
+
+.inline-title {
+	display: inline;
+	margin-right: 2%;
+}
+
+.midium-title {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.right-position {
+	float: right;
+}
+
+.cast-bloc {
+	display:inline-block;
+	position:relative;
+	height: 17%;
+	width: 17%;
+	vertical-align: top;
+	padding-right: 2px;
+}
+
 /*
 	REMOTE
 */

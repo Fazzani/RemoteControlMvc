@@ -35,7 +35,7 @@ class BaseController{
 	const getSeasons = '{"jsonrpc":"2.0","id":1,"method":"VideoLibrary.GetSeasons","params":{"tvshowid":%s,"properties":["episode","thumbnail","season","showtitle","tvshowid"]}}';
 	const getEpisodes = '{"jsonrpc":"2.0","id":1,"method":"VideoLibrary.GetEpisodes","params":{"tvshowid":%s,"season":%s,"properties":["plot","thumbnail","season","title","tvshowid","episode","playcount","votes","rating"]}}';
 	const videoLibraryGetMovies = '{"jsonrpc": "2.0", "method": "VideoLibrary.GetMovies", "id": 1, "params":{"properties":["file","title","playcount","resume","year","runtime","lastplayed","thumbnail","plot"]}}';
-	const videoLibraryGetMoviesDetails = '{"jsonrpc": "2.0", "method": "VideoLibrary.GetMovieDetails", "id": 1, "params":{"movieid":%s,"properties":["art","genre","plot","title","originaltitle","year","rating","thumbnail","playcount","file","fanart"]}}';
+	const videoLibraryGetMoviesDetails = '{"jsonrpc": "2.0", "method": "VideoLibrary.GetMovieDetails", "id": 1, "params":{"movieid":%s,"properties":["art","genre","plot","title","originaltitle","year","rating","thumbnail","playcount","file","fanart","streamdetails","cast","country","director"]}}';
 	const fileGetDirectory = '{"jsonrpc":"2.0","method":"Files.GetDirectory","id":2,"params":{"directory":"D:\\TV Shows\\30 Rock","properties":["file"]}}'; // directory from above query
 	const filesGetFileDetails = '{"jsonrpc": "2.0", "id": 1, "method": "Files.GetFileDetails", "params":{"file":"D:\\TV Shows\\30 Rock\\Season 7\\30.Rock.S07E06.720p.WEB-DL.DD5.1.H.264-POD.mkv","properties":["size","mimetype","file"]}}';
 	const playerGetActivePlayers = '{"jsonrpc":"2.0","method":"Player.GetActivePlayers","id":1}';
