@@ -39,8 +39,8 @@ $(function() {
 	 */
 	var configpopup = $("#hostconfigpopup");
 	var listConfigPopup = $('#listconfig');
-	configpopup.enhanceWithin().popup({ history: false });
-	listConfigPopup.enhanceWithin().popup({ history: false });
+	configpopup.enhanceWithin().popup();
+	listConfigPopup.enhanceWithin().popup();
 
 	if (isFirstCnx)
 		configpopup.popup("open");
@@ -51,7 +51,7 @@ $(function() {
 	$("body").on('connectionLoosed', function(e) {
 		//console.log('connection Loosed...');
 		if(listConfigPopup.closest('.ui-popup-container').hasClass('ui-popup-hidden'))
-				listConfigPopup.popup("open");
+			listConfigPopup.popup("open");
 	}).on('GetBackConnectedEvent', function(e) {
 		//console.log('GetBackConnectedEvent...');
 		if(listConfigPopup.closest('.ui-popup-container').hasClass('ui-popup-active'))
@@ -156,7 +156,8 @@ $(document)
 
 				}).on(
 				'pagechange',
-				function(event) {
+				function(event) { 
+				    
 					$("img.lazy").lazyload({
 					    effect : "fadeIn"
 					});
@@ -169,6 +170,7 @@ $(document)
 						$("div#mainheader a[id='page_home']").addClass($.mobile.activeBtnClass);
 
 				}).on('pagecreate', function(event) {
+				   $('#carousel').elastislide();
 					$(this).on('click', '#add-conf', function(e) {
 						// console.log($("#hostconfigpopup").length);
 						// Add config
