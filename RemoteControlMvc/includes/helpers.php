@@ -45,4 +45,14 @@ function formatTitle($title = ''){
 	return $title;
 }
 
+// Helper function for title formatting:
+function getXbmcImg($array, $rurl){
+	try {
+		return $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$array)[1]), 0, -1)));
+	} catch (Exception $e) {
+		return "assests/img/home.png";
+	}
+
+}
+
 ?>

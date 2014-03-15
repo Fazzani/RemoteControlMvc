@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
 /*
 	This is the main include file.
 	It is only used in index.php and keeps it much cleaner.
