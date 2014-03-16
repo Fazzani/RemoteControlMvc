@@ -28,7 +28,7 @@ try {
    		src="assets/img/loader-img.gif" 
         id="poster"
         class="movie-pic lazy"
-        data-original="<?php echo $rurl.'image/image://'.str_replace("%","%25",urlencode(substr(urldecode(explode("://",$movie["thumbnail"])[1]), 0, -1)));?>"
+        data-original="<?php echo (getXbmcImg($movie["thumbnail"], $rurl));?>"
       	/>
          <h2>
             <?= $movie["label"]?>

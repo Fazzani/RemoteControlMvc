@@ -126,6 +126,8 @@ $(function() {
 	    y : 0
 	/* move it to top */
 	});
+    }).on("click", "#back2", function() {
+	history.back();
     });
     /**
      * ********************************************- LocalStorage

@@ -8,10 +8,11 @@ render ( '_header', array (
 <?php
 
 try {
-
+	
 	?>
-<div style="background: url(<?php echo getXbmcImg($response["thumbnail"], $rurl);?>) no-repeat">
-	<div>
+<div class="detailsMovieContainer">
+	<img src="<?php echo getXbmcImg($response["thumbnail"], $rurl);?>" />
+	<div class="detailsMovie">
 		<div>
 			<h2 class="inline-title">
             <?= $response["label"]?>
@@ -27,8 +28,7 @@ try {
 		?>
          <span><?= $genre?> </span>
          <?php
-	
-}
+	}
 	?>
       </div>
 		<div>
@@ -38,8 +38,7 @@ try {
 		?>
          <span><?= $director?> </span>
          <?php
-	
-}
+	}
 	?>
       </div>
 		<ul
@@ -51,9 +50,9 @@ try {
 		if (isset ( $cast ["thumbnail"] )) {
 			?>
    
-   <li><a href="#"> <img src="<?php echo (getXbmcImg($cast["thumbnail"], $rurl));?>"/>
+   <li><a href="#"> <img src="<?php echo (getXbmcImg($cast["thumbnail"], $rurl));?>" />
 			</a></li>
-         <?php	
+         <?php
 		}
 	}
 	?>
@@ -63,7 +62,32 @@ try {
 			<p><?= $response["plot"]?></p>
 		</div>
 	</div>
-</div>
+	<div
+		data-role="footer"
+		style="overflow: hidden;"
+		data-position="fixed"
+	>
+		<div data-role="navbar">
+			<ul>
+				<li><a
+					href="#"
+					id="back2"
+					data-icon="custom"
+				></a></li>
+				<li><a
+				class="xbmcAction"
+			data-method="Player.Open"
+			data-params='{"item":{"movieid":<?= $response["movieid"]?>}}'
+					href="#"
+					id="play2"
+					data-icon="custom"
+				></a></li>
+			</ul>
+		</div>
+		<!-- /navbar -->
+	</div>
+	<!-- /footer -->
+	</div>
 <?php
 } catch ( Exception $e ) {
 	print_r ( $e );
