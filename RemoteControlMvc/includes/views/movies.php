@@ -20,7 +20,7 @@ try {
    <?php
    foreach ( $response ["result"] ["movies"] as $movie ) {
 			?>
-   <li
+   <li 
       class="ui-btn ui-li ui-li-has-thumb"
    ><a href="?movies&movieid=<?= $movie['movieid']?>"><img
   		height="80px"

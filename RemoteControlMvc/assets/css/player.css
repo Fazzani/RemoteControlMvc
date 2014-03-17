@@ -98,7 +98,8 @@ div.bottomstatusbaractive {
 	float: left;
 	height: 8px;
 	padding: 0;
-	position: relative;
+	position: absolute;
+	bottom: 0px;
 	width: 100%;
 }
 
@@ -203,7 +204,7 @@ div.bottomstatusbaractive {
 }
 
 #lecteur span,#lecteur span:hover {
-	background-size: 90%;
+	background-size: 100%;
 	cursor: pointer;
 	display: block;
 	float: left;
@@ -343,22 +344,23 @@ div#videoCoverArt {
 }
 
 #videoDescription,#audioDescription {
+	text-decoration: none !important;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 	height: 100%;
-	width: 75%;
-	overflow: hidden;
 }
 
 #nowPlayingContent {
-	height: 88%;
+	height: 95%;
 	width: 100%;
 }
 
 #lecteur {
 	position: absolute;
-	right: -22px;
-	top: 48%;
-	width: 50%;
-	height: 50%;
+	right: -10%;
+	bottom:5%;
+	width: 70%;
+	height: 26%;
 }
 
 .channelnumber {
