@@ -68,7 +68,7 @@ console.log('isConnected : ' + isConnected);
 <body> 
 
 <div data-role="page" data-theme="b" id="page_<?php echo strtolower(str_replace(" ","",$title))?>">
-	<div data-role="sidemenu" data-headername="Lecteur">
+	<div data-role="sidemenu" data-headername="Lecteur" data-widthcoef="0.6">
 		<div style="height: 100%" id="nowPlayingPanel">
       <div id="nowPlayingContent">
          <div id="audioDescription">
