@@ -49,9 +49,9 @@
    href="favicon.ico"
    type="image/x-icon"
 />
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="assets/js/jquery-1.11.0.min.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+<script src="assets/js/jquery.mobile-1.4.2.min.js"></script>
 <script src="assets/js/jquery.mobile.lazyloader.min.js"></script>
 <script
    language="javascript"
@@ -68,7 +68,7 @@ console.log('isConnected : ' + isConnected);
 <body> 
 
 <div data-role="page" data-theme="b" id="page_<?php echo strtolower(str_replace(" ","",$title))?>">
-	<div data-role="sidemenu" data-headerName="Lecteur">
+	<div data-role="sidemenu" data-headername="Lecteur">
 		<div style="height: 100%" id="nowPlayingPanel">
       <div id="nowPlayingContent">
          <div id="audioDescription">
