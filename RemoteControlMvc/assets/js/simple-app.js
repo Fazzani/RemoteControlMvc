@@ -176,8 +176,8 @@ $(function() {
 	}).on('playingMedia', function(event) {
 		$("div:jqmData(role='sidemenu')").sidemenu('showButton');
 		xremote.core.page.current.find('#nowPlayingPanel').show();
-	}).on('pageshow', function(event,pg) {
-		xremote.core.page.current = $(this);
+	}).on('pageshow', function(event, pg) {
+		xremote.core.page.current =  $(":mobile-pagecontainer").pagecontainer("getActivePage");
 		if (xremote.context.isConnected) {
 			console.log('pageshow');
 			xremote.core.nowPlayingManager.destroy();
@@ -187,9 +187,6 @@ $(function() {
 		$('#carousel').elastislide();
 	})
 	.on('pagechange', function(event, obj) {
-		//xremote.core.page.current = obj.toPage;
-		console.log('pagechange');
-		// $("div:jqmData(role='sidemenu')").sidemenu();
 		$("img.lazy").lazyload({
 			effect : "fadeIn"
 		});

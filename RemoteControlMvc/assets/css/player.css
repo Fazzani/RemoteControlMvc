@@ -93,12 +93,12 @@ div.bottomstatusbaractive {
 	background:
 		url("data:image/png;charset=utf-8;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAICAAAAAAdccqdAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUCB1jsGfiYOJh4gJCdiY2JlYABfcAiC/XwOEAAAAASUVORK5CYII=")
 		repeat-x scroll 0 0 rgba(0, 0, 0, 0);
-	border: 1px solid rgba(0, 0, 0, 0.7);
 	border-radius: 20px;
 	float: left;
 	height: 8px;
 	padding: 0;
 	position: absolute;
+	left:0px;
 	bottom: 0px;
 	width: 100%;
 }

@@ -119,29 +119,32 @@
 			paused : false,
 			playlistid : -1,
 			ischannel : false,
-			timeoutId : null,
+			timeoutId : [],
 			init : function() {
-				if(that != null)
-				    $(that).off();
 				that = this;
-				this.lastActivePlayerId=-1;
+				this.lastActivePlayerId = -1;
 				this.getElementById('pbPause').hide(); /* Assume we are not playing something */
 				that.bindPlaybackControls();
 				that.updateState();
 				this.getElementById('nextTrack').bind('click', $.proxy(that.showPlaylist, that));
 				this.getElementById('nowPlayingPlaylist').bind('click', function(){
-						return false;
+				    return false;
 				});
 				$(window).bind('click', $.proxy(that.hidePlaylist, that));
 			},
 			destroy : function(){
-				console.log('destroying NowPlayingManager');
 				$(that).off();
-				clearTimeout(that.timeoutId);
+				$.each(that.timeoutId, function(i){
+				    clearTimeout(that.timeoutId[i]);
+				});
+				
 			},
 			getElementById : function(id){
-				if(this.pageJqM != null)
-				    return this.pageJqM.find("#"+id);
+			    
+				if(this.pageJqM != null){
+				    return $(this.pageJqM[0]).find("#"+id);
+				}
+				    
 				return $("#"+id);
 			},
 			updateState : function() {
@@ -173,18 +176,18 @@
 
 					}
 					if (that.activePlayerId >= 0 && that.lastActivePlayerId != that.activePlayerId) {
-						console.log('trigger playingMedia');
+						//console.log('trigger playingMedia');
 						that.lastActivePlayerId = that.activePlayerId;
 						$(document).trigger('playingMedia');
 					} else {
 						if (that.lastActivePlayerId != that.activePlayerId) {
-							console.log('trigger stoppedMedia');
+							//console.log('trigger stoppedMedia');
 							that.lastActivePlayerId = that.activePlayerId;
 							that.stopRefreshTime();
 							$(document).trigger('stoppedMedia');
 						}
 					}
-					that.timeoutId = setTimeout($.proxy(that.updateState, that), 1000);
+					that.timeoutId.push(setTimeout($.proxy(that.updateState, that), 1000));
 
 				});
 			},
@@ -381,7 +384,7 @@
 										that.getElementById('nowPlayingPanel').hide();
 									}
 									if (that.autoRefreshAudioPlaylist) {
-										setTimeout(jQuery.proxy(that.updateAudioPlaylist, that), 1000);
+									    that.timeoutId.push(setTimeout(jQuery.proxy(that.updateAudioPlaylist, that), 1000));
 									}
 								});
 			},
@@ -403,10 +406,10 @@
 				that.refreshAudioData();
 			},
 			refreshAudioData : function() {
-				if (that.autoRefreshAudioData && !that.audioRefreshTimer) {
-					that.audioRefreshTimer = 1;
-					setTimeout(jQuery.proxy(that.refreshAudioDataLoop, that), 1000);
-				}
+//				if (that.autoRefreshAudioData && !that.audioRefreshTimer) {
+//					that.audioRefreshTimer = 1;
+//					that.timeoutId.push(setTimeout(jQuery.proxy(that.refreshAudioDataLoop, that), 1000));
+//				}
 				if (that.playing && !that.paused) {
 					that.trackBaseTime++;
 				}
@@ -458,11 +461,10 @@
 				that.refreshVideoData();
 			},
 			refreshVideoData : function() {
-				// console.log('refreshVideoData');
-				if (that.autoRefreshVideoData && !that.videoRefreshTimer) {
-					that.videoRefreshTimer = 1;
-					setTimeout(jQuery.proxy(that.refreshVideoDataLoop, that), 1500);
-				}
+//				if (that.autoRefreshVideoData && !that.videoRefreshTimer) {
+//					that.videoRefreshTimer = 1;
+//					that.timeoutId.push(setTimeout(jQuery.proxy(that.refreshVideoDataLoop, that), 5000));
+//				}
 				if (that.playing && !that.paused) {
 					that.trackBaseTime++;
 				}
@@ -707,14 +709,12 @@
 													+ "&param=" + $(this).attr('data-params'))
 									.done(
 											function(data) {
-												console.log('.xbmcAction');
 												var obj = $.parseJSON(JSON.stringify(data));
 												if (obj.error)
 													console.log(obj.error.message);
 												else if (obj.result.channelgroupdetails) {
 													var html = "";
 													var oldclassLi = listchnls.find('a').attr("class");
-													console.log(oldclassLi);
 													$
 															.each(
 																	obj.result.channelgroupdetails.channels,
@@ -746,7 +746,6 @@
 							$.getJSON(
 									'inputExecuteAction.php?id=1&method=' + $(this).attr('data-method') + "&param="
 											+ $(this).attr('data-params')).done(function(data) {
-								console.log('.nestedList');
 								var obj = $.parseJSON(JSON.stringify(data));
 								if (obj.error)
 									console.log(obj.error.message);
