@@ -106,7 +106,7 @@
    </form>
 </div>
 </body>
-<script src="assets/js/simple-app.js"></script>
 <script src="assets/js/xbmcDefaultLibrary.js"></script>
 <script src="assets/js/MediaLibrary.js"></script>
+<script src="assets/js/simple-app.js"></script>
 </html>

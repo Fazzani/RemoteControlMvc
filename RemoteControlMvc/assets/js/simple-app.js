@@ -5,6 +5,9 @@ jQuery.fn.reset = function() {
 };
 
 $(function() {
+	if (isConnected) {
+		var nowPlayingManager = new NowPlayingManager({pageJqM: $(":mobile-pagecontainer").pagecontainer( "getActivePage" )});
+	}
     // http://www.appelsiini.net/projects/lazyload
 
     // il faut pas la déplacer sinon elle posera un pb pr les popops.
@@ -38,9 +41,7 @@ $(function() {
      * Gestion_des_configs***********************************************
      */
     var configpopup = $("#hostconfigpopup"), 
-    listConfigPopup = $('#listconfig'),
-    nowPlayingPanel = $('#nowPlayingPanel'), 
-    sideMenuPlayer = $("div:jqmData(role='sidemenu')");
+    listConfigPopup = $('#listconfig');
     
     configpopup.enhanceWithin().popup();
     listConfigPopup.enhanceWithin().popup();
@@ -50,8 +51,6 @@ $(function() {
 
     if (!isConnected)
     	listConfigPopup.popup("open");
-    
-    sideMenuPlayer.sidemenu('hideButton');
     
     $("body").on('connectionLoosed', function(e) {
 	// console.log('connection Loosed...');
@@ -90,17 +89,17 @@ $(function() {
 	configpopup.find('input').each(function(index) {
 
 	    if ($(this).attr('name') == 'host')
-		$(this).val(val.host);
+	    	$(this).val(val.host);
 	    else if ($(this).attr('name') == 'configname')
-		$(this).val(val.configname);
+	    	$(this).val(val.configname);
 	    else if ($(this).attr('name') == 'port')
-		$(this).val(val.port);
+	    	$(this).val(val.port);
 	    else if ($(this).attr('name') == 'user')
-		$(this).val(val.user);
+	    	$(this).val(val.user);
 	    else if ($(this).attr('name') == 'password')
-		$(this).val(val.password);
+	    	$(this).val(val.password);
 	    else if ($(this).attr('name') == 'ismodif')
-		$(this).val(true);
+	    	$(this).val(true);
 	});
 	$("#hostconfigpopup").popup("open");
     }).on('click', ".config_select", function(e) {
@@ -127,10 +126,10 @@ $(function() {
 
 	return false;
     }).on("focus", ".ui-popup-active input, .ui-popup-active textarea", function() {
-	$(this).closest('.ui-popup').popup("reposition", {
-	    y : 0
+    	$(this).closest('.ui-popup').popup("reposition", {
+    		y : 0
 	/* move it to top */
-	});
+    	});
     }).on("click", "#back2", function() {
     	history.back();
     });
@@ -159,7 +158,11 @@ $(function() {
 $(document).on('mobileinit', function() {
 	
 }).on('pagechange', function(event) {
-
+	if (isConnected) {
+		nowPlayingManager=new NowPlayingManager();
+		nowPlayingManager.pageJqM= $(":mobile-pagecontainer").pagecontainer( "getActivePage" );
+	}
+	//$("div:jqmData(role='sidemenu')").sidemenu();
     $("img.lazy").lazyload({
     	effect : "fadeIn"
     });
@@ -169,17 +172,20 @@ $(document).on('mobileinit', function() {
     	$("div#mainheader a[id='" + event.currentTarget.activeElement.id + "']").addClass($.mobile.activeBtnClass);
     else
     	$("div#mainheader a[id='page_home']").addClass($.mobile.activeBtnClass);
-
+   
+	
 }).on('pageshow', function(event) {
     $('#carousel').elastislide();
 }).on('stoppedMedia', function(event) {
-	sideMenuPlayer.sidemenu('hideButton');
-	nowPlayingPanel.hide();
+	$("div:jqmData(role='sidemenu')").sidemenu('close', function(sidemenu){
+		sidemenu.hideButton();
+	});
+	$(":mobile-pagecontainer").pagecontainer( "getActivePage" ).find('#nowPlayingPanel').hide();
 }).on('playingMedia', function(event) {
-	sideMenuPlayer.sidemenu('showButton');
-	nowPlayingPanel.show();
+	$("div:jqmData(role='sidemenu')").sidemenu('showButton');
+	$(":mobile-pagecontainer").pagecontainer( "getActivePage" ).find('#nowPlayingPanel').show();
 }).on('pagecreate', function(event) {
-
+	
     $(this).on('click', '#add-conf', function(e) {
     	// console.log($("#hostconfigpopup").length);
     	// Add config

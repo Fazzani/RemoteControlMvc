@@ -1,5 +1,4 @@
-$(function() {
-	if (isConnected) {
+
 
 		/*
 		 * Copyright (C) 2005-2012 Team XBMC http://www.xbmc.org
@@ -110,6 +109,7 @@ $(function() {
 		};
 
 		NowPlayingManager.prototype = {
+			pageJqM:null,
 			updateCounter : 0,
 			activePlayer : "",
 			activePlayerId : -1,
@@ -121,14 +121,20 @@ $(function() {
 			ischannel : false,
 			init : function() {
 				that = this;
-				$('#pbPause').hide(); /* Assume we are not playing something */
+				this.lastActivePlayerId=-1;
+				this.getElementById('pbPause').hide(); /* Assume we are not playing something */
 				that.bindPlaybackControls();
 				that.updateState();
-				$('#nextTrack').bind('click', $.proxy(that.showPlaylist, that));
-				$('#nowPlayingPlaylist').bind('click', function() {
-					return false;
+				this.getElementById('nextTrack').bind('click', $.proxy(that.showPlaylist, that));
+				this.getElementById('nowPlayingPlaylist').bind('click', function(){
+						return false;
 				});
 				$(window).bind('click', $.proxy(that.hidePlaylist, that));
+			},
+			getElementById: function(id){
+				if(this.pageJqM!=null)
+					return this.pageJqM.find("#"+id);
+				return $("#"+id);
 			},
 			updateState : function() {
 
@@ -206,20 +212,20 @@ $(function() {
 						});
 			},
 			bindPlaybackControls : function() {
-				$('#pbNext').bind('click', jQuery.proxy(that.nextTrack, that));
-				$('#pbPrev').bind('click', jQuery.proxy(that.prevTrack, that));
-				$('#pbStop').bind('click', jQuery.proxy(that.stopTrack, that));
-				$('#pbPlay').bind('click', jQuery.proxy(that.playPauseTrack, that));
-				$('#pbPause').bind('click', jQuery.proxy(that.playPauseTrack, that));
+				that.getElementById('pbNext').bind('click', jQuery.proxy(that.nextTrack, that));
+				that.getElementById('pbPrev').bind('click', jQuery.proxy(that.prevTrack, that));
+				that.getElementById('pbStop').bind('click', jQuery.proxy(that.stopTrack, that));
+				that.getElementById('pbPlay').bind('click', jQuery.proxy(that.playPauseTrack, that));
+				that.getElementById('pbPause').bind('click', jQuery.proxy(that.playPauseTrack, that));
 			},
 			showPlaylist : function() {
-				$('#nextText').html('Playlist: ');
-				$('#nowPlayingPlaylist').show();
+				that.getElementById('nextText').html('Playlist: ');
+				that.getElementById('nowPlayingPlaylist').show();
 				return false;
 			},
 			hidePlaylist : function() {
-				$('#nextText').html('Next: ');
-				$('#nowPlayingPlaylist').hide();
+				that.getElementById('nextText').html('Next: ');
+				that.getElementById('nowPlayingPlaylist').hide();
 				return false;
 			},
 			nextTrack : function() {
@@ -252,12 +258,12 @@ $(function() {
 				}
 			},
 			showPauseButton : function() {
-				$('#pbPause').show();
-				$('#pbPlay').hide();
+				that.getElementById('pbPause').show();
+				that.getElementById('pbPlay').hide();
 			},
 			showPlayButton : function() {
-				$('#pbPause').hide();
-				$('#pbPlay').show();
+				that.getElementById('pbPause').hide();
+				that.getElementById('pbPlay').show();
 			},
 			displayAudioNowPlaying : function() {
 				if (!that.autoRefreshAudioPlaylist) {
@@ -332,23 +338,23 @@ $(function() {
 													li.addClass('activeItem');
 												}
 												if (i == (that.currentItem + 1)) {
-													$('#nextTrack').html(code).show();
+													that.getElementById('nextTrack').html(code).show();
 												}
 												li.bind('click', jQuery.proxy(that.playPlaylistItem, that));
 												ul.append(li.attr('seq', i).html(code));
 											}, that));
 											if (data.result.limits.total > 1) {
 												if (activeItem && data.result.limits.total - 1 == activeItem.seq) {
-													$('#nextTrack').html(
+													that.getElementById('nextTrack').html(
 															'<div class="trackInfo">Last track in playlist</div>')
 															.show();
 												}
-												$('#nextText').show();
-												$('#nowPlayingPlaylist').html('').append(ul);
+												that.getElementById('nextText').show();
+												that.getElementById('nowPlayingPlaylist').html('').append(ul);
 											} else {
-												$('#nextText').hide();
-												$('#nowPlayingPlaylist').hide();
-												$('#nextTrack').hide();
+												that.getElementById('nextText').hide();
+												that.getElementById('nowPlayingPlaylist').hide();
+												that.getElementById('nextTrack').hide();
 											}
 											if (!that.comparePlaylistItems(activeItem, that.activePlaylistItem)) {
 												that.activePlaylistItem = activeItem;
@@ -360,14 +366,14 @@ $(function() {
 												that.stopRefreshTime();
 											}
 											that.activePlaylist = data.result.items;
-											$('#videoDescription').hide();
-											$('#audioDescription').show();
-											$('#nowPlayingPanel').show();
+											that.getElementById('videoDescription').hide();
+											that.getElementById('audioDescription').show();
+											that.getElementById('nowPlayingPanel').show();
 										}
 									} else {
 										that.activePlaylist = null;
-										$('#audioDescription').hide();
-										$('#nowPlayingPanel').hide();
+										that.getElementById('audioDescription').hide();
+										that.getElementById('nowPlayingPanel').hide();
 									}
 									if (that.autoRefreshAudioPlaylist) {
 										setTimeout(jQuery.proxy(that.updateAudioPlaylist, that), 1000);
@@ -411,34 +417,34 @@ $(function() {
 						if (that.activePlaylistItem.thumbnail) {
 							imgPath = rurl + 'image/' + encodeURI(that.activePlaylistItem.thumbnail);
 						}
-						$('#audioCoverArt').html(
+						that.getElementById('audioCoverArt').html(
 								'<img src="' + imgPath + '" alt="' + that.activePlaylistItem.album + ' cover art">');
-						$('#audioTrackTitle').html(
+						that.getElementById('audioTrackTitle').html(
 								'<span title="' + that.activePlaylistItem.title + '">' + that.activePlaylistItem.title
 										+ '</span>');
 						if (that.activePlaylistItem.album) {
-							$('#audioAlbumTitle').html(
+							that.getElementById('audioAlbumTitle').html(
 									'<span title="' + that.activePlaylistItem.album + '">'
 											+ that.activePlaylistItem.album + '</span>').show();
 						} else {
-							$('#audioAlbumTitle').hide();
+							that.getElementById('audioAlbumTitle').hide();
 						}
-						$('#audioArtistTitle').html(that.activePlaylistItem.artist);
-						$('#progressBar').attr('style', '');
+						that.getElementById('audioArtistTitle').html(that.activePlaylistItem.artist);
+						that.getElementById('progressBar').attr('style', '');
 					}
-					$('#audioDuration').html(
+					that.getElementById('audioDuration').html(
 							xbmc.core.durationToString(that.trackBaseTime) + ' / '
 									+ xbmc.core.durationToString(that.trackDurationTime));
-					var buttonWidth = $('#progressBar .progressIndicator').width();
+					var buttonWidth = that.getElementById('progressBar .progressIndicator').width();
 					var progressBarWidth = (that.trackBaseTime / that.trackDurationTime) * 100;
-					var progressSliderPosition = Math.ceil(($('#progressBar').width() / 100) * progressBarWidth)
+					var progressSliderPosition = Math.ceil((that.getElementById('progressBar').width() / 100) * progressBarWidth)
 							- buttonWidth;
 					if (progressSliderPosition < 0) {
 						progressSliderPosition = 0;
 					}
 					if (progressBarWidth <= 100) {
-						$('#progressBar .elapsedTime').width(progressBarWidth + '%');
-						$('#progressBar .progressIndicator').css('left', progressSliderPosition);
+						that.getElementById('progressBar .elapsedTime').width(progressBarWidth + '%');
+						that.getElementById('progressBar .progressIndicator').css('left', progressSliderPosition);
 					}
 				}
 			},
@@ -463,8 +469,6 @@ $(function() {
 				if (that.activePlaylistItem) {
 					if (JSON.stringify(that.activePlaylistItem) != JSON.stringify(that.lastPlaylistItem)) {
 						that.ischannel = that.activePlaylistItem.type == 'channel';
-						console.log('true is diff that.activePlaylistItem :' + JSON.stringify(that.activePlaylistItem)
-								+ '      that.lastPlaylistItem : ' + JSON.stringify(that.lastPlaylistItem));
 						that.lastPlaylistItem = that.activePlaylistItem;
 						var imgPath = xbmc.core.DEFAULT_VIDEO_COVER;
 						if (that.activePlaylistItem.thumbnail) {
@@ -473,34 +477,34 @@ $(function() {
 							else
 								imgPath = rurl + 'image/' + encodeURI(that.activePlaylistItem.thumbnail);
 						}
-						$('#videoCoverArt').html(
+						that.getElementById('videoCoverArt').html(
 								'<img src="' + imgPath + '" alt="' + that.activePlaylistItem.title + ' cover art">');
-						$('#videoShowTitle').html(that.activePlaylistItem.showtitle || '&nbsp;');
+						that.getElementById('videoShowTitle').html(that.activePlaylistItem.showtitle || '&nbsp;');
 						var extra = '';
 						if (that.activePlaylistItem.season >= 0 && that.activePlaylistItem.episode >= 0) {
 							extra = that.activePlaylistItem.season + 'x' + that.activePlaylistItem.episode + ' ';
 						}
 						if (that.ischannel)
-							$('#videoTitle').html(
+							$that.getElementById('videoTitle').html(
 									extra + '<span class="channelnumber">' + that.activePlaylistItem.channelnumber
 											+ '- </span>' + that.activePlaylistItem.label);
 						else
-							$('#videoTitle').html(extra + that.activePlaylistItem.title);
+							that.getElementById('videoTitle').html(extra + that.activePlaylistItem.title);
 					}
 					if (!that.ischannel) {
-						$('#videoDuration').html(
+						that.getElementById('videoDuration').html(
 								xbmc.core.durationToString(that.trackBaseTime) + ' / '
 										+ xbmc.core.durationToString(that.trackDurationTime));
-						var buttonWidth = $('#progressBar .progressIndicator').width();
+						var buttonWidth = that.getElementById('progressBar .progressIndicator').width();
 						var progressBarWidth = (that.trackBaseTime / that.trackDurationTime) * 100;
-						var progressSliderPosition = Math.ceil(($('#progressBar').width() / 100) * progressBarWidth)
+						var progressSliderPosition = Math.ceil((that.getElementById('progressBar').width() / 100) * progressBarWidth)
 								- buttonWidth;
 						if (progressSliderPosition < 0) {
 							progressSliderPosition = 0;
 						}
 						if (progressBarWidth <= 100) {
-							$('#progressBar .elapsedTime').width(progressBarWidth + '%');
-							$('#progressBar .progressIndicator').css('left', progressSliderPosition);
+							that.getElementById('progressBar .elapsedTime').width(progressBarWidth + '%');
+							that.getElementById('progressBar .progressIndicator').css('left', progressSliderPosition);
 						}
 					}
 				}
@@ -569,23 +573,23 @@ $(function() {
 													li.addClass('activeItem');
 												}
 												if (i == (that.currentItem + 1)) {
-													$('#nextTrack').html(code).show();
+													that.getElementById('nextTrack').html(code).show();
 												}
 												li.bind('click', jQuery.proxy(that.playPlaylistItem, that));
 												ul.append(li.attr('seq', i).html(code));
 											}, that));
 											if (data.result.limits.total > 1) {
-												$('#nextText').show();
+												this.getElementById('nextText').show();
 												if (activeItem && data.result.limits.total == activeItem.seq) {
-													$('#nextTrack').html(
+													this.getElementById('nextTrack').html(
 															'<div class="trackInfo">Last track in playlist</div>')
 															.show();
 												}
-												$('#nowPlayingPlaylist').html('').append(ul);
+												that.getElementById('nowPlayingPlaylist').html('').append(ul);
 											} else {
-												$('#nextText').hide();
-												$('#nowPlayingPlaylist').hide();
-												$('#nextTrack').hide();
+												that.getElementById('nextText').hide();
+												that.getElementById('nowPlayingPlaylist').hide();
+												that.getElementById('nextTrack').hide();
 											}
 											if (!that.comparePlaylistItems(activeItem, that.activePlaylistItem)) {
 												that.activePlaylistItem = activeItem;
@@ -597,9 +601,9 @@ $(function() {
 												that.stopRefreshTime();
 											}
 											that.activePlaylist = data.result.items;
-											$('#videoDescription').show();
-											$('#audioDescription').hide();
-											$('#nowPlayingPanel').show();
+											that.getElementById('videoDescription').show();
+											that.getElementById('audioDescription').hide();
+											that.getElementById('nowPlayingPanel').show();
 										}
 									} else {
 										$
@@ -615,16 +619,16 @@ $(function() {
 																	that.updateActiveItemDurationRunOnce = true;
 																	that.updatePlayer();
 																}
-																$('#nextText').hide();
-																$('#nowPlayingPlaylist').hide();
-																$('#nextTrack').hide();
-																$('#videoDescription').show();
-																$('#audioDescription').hide();
-																$('#nowPlayingPanel').show();
+																that.getElementById('nextText').hide();
+																that.getElementById('nowPlayingPlaylist').hide();
+																that.getElementById('nextTrack').hide();
+																that.getElementById('videoDescription').show();
+																that.getElementById('audioDescription').hide();
+																that.getElementById('nowPlayingPanel').show();
 															} else {
 																that.activePlaylist = null;
-																$('#videoDescription').hide();
-																$('#nowPlayingPanel').hide();
+																that.getElementById('videoDescription').hide();
+																that.getElementById('nowPlayingPanel').hide();
 															}
 
 														});
@@ -635,7 +639,7 @@ $(function() {
 									}
 								});
 			}
-		}
+		};
 		/*-------------------------------------------------------------URLS Utils
 		http://wiki.xbmc.org/index.php?title=Window_IDs
 		--------------------------------------------------------------*/
@@ -762,86 +766,8 @@ $(function() {
 
 						});
 		// var mediaLibrary = new MediaLibrary(),
-		nowPlayingManager = new NowPlayingManager();
+		//nowPlayingManager = new NowPlayingManager();
 		// that = nowPlayingManager;
 		// xbmc.core.applyDeviceFixes();
-	}
-});
 
-// var loadNestList = function (me) {
-// $me=$(me);
-// var html = "";
-// //var nestedlist = $me.find('ul#nestedLevel1');
-// $.ajax({
-// url: 'inputExecuteAction.php?id=1&method=' + $me.attr('data-method') +
-// "&param=" + $me.attr('data-params'),
-// dataType: 'json',
-// async: false,
-// success: function(data) {
-// var obj = $.parseJSON(JSON.stringify(data));
-// if (obj.error)
-// console.log(obj.error.message);
-// else if (obj.result.seasons)
-// {
-// $.each(obj.result.seasons,
-// function (i, item) {
-// html += "<li><a href=\"#\">" + item.label + "</a></li>";
-// });
-//                            
-// //nestedlist.html(html).trigger('create');
-// }
-//                       
-// }, error:function (data) {
-// var obj = $.parseJSON(JSON.stringify(data.responseText
-// .replace('$daurl', '')));
-//
-// console.log('fail!!!!! the error is : ' + obj.error);
-// }
-// });
-// return html;
-// };
-// (function( $, window, undefined ) {
-// $.mobile.document.on("pagecreate", "div", function(){
-// $("ul>li>ul").css("display","none");
-// $("ul>li>ul").parent().addClass("ui-btn ui-btn-icon-right ui-icon-carat-r");
-// });
-// $.mobile.document.on( "click", ".ui-listview>li", function(){
-// if( $(this).children( "ul" ).length == 0 ) {
-// return;
-// }
-// var li = "<a class='ui-btn ui-corner-all ui-btn-icon-left ui-icon
-// ui-icon-back ui-icon-shadow' data-rel='back'>back</a>" +
-// eval($(this).attr("data-func")+"(this)");
-// var currentPage = $(this).closest(".ui-page-active").clone().uniqueId(),
-// nestedList = $( this ).children("ul").clone().attr( "data-" + $.mobile.ns +
-// "role", "listview" ).css("display","block");
-// currentPage.attr( "id" , currentPage.attr( "id" ) +"-nested");
-// pageID = currentPage.attr( "id" );
-//		 
-// currentPage.find("div.ui-content").html(nestedList.html(li));
-// $.mobile.pageContainer.append(currentPage);
-// currentPage.find( ":jqmData(role=listview)" ).listview();
-// currentPage.find("a:jqmData(rel='back')").jqmData("iconpos", "notext");
-// currentPage.page();
-//		 
-// // $.mobile.pageContainer.append(currentPage);
-//		 
-// //nestedList.closest(":jqmData(role='page')").trigger('pagecreate');
-// // currentPage.trigger('create');
-// $.mobile.changePage(currentPage, {dataUrl : $(this).attr('data-url'),
-// changeHash : true} );
-//		 
-// //li.listview('refresh');
-// // $.mobile.resetActivePageHeight();
-//		 
-// // Remove Nested Page
-// $.mobile.document.one( "pagechange", function(){
-// $.mobile.document.one( "pagechange", function(){
-// $.mobile.document.one( "pagechange", function(){
-// $( "#" + pageID).remove();
-// });
-// });
-// });
-//		
-// });
-// })( jQuery, this );
+
