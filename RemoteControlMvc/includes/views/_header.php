@@ -53,17 +53,21 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="assets/js/jquery.mobile-1.4.2.min.js"></script>
 <script src="assets/js/jquery.mobile.lazyloader.min.js"></script>
+
 <script
    language="javascript"
    type="text/javascript"
 >
-var isFirstCnx = '<?= HostsManager::isFirstCnx() ?>'=='1' ? true: false;
-var isConnected = '<?= HostsManager::IsConnected() ?>'=='1' ? true: false;
-var rurl = '<?php echo($rurl); ?>';	
-var url = '<?php echo($url); ?>';
-console.log('isFirstCnx : ' + isFirstCnx);
-console.log('isConnected : ' + isConnected);
+
+var xremote = window.xremote || {};
+xremote.context = {		
+			isFirstCnx : '<?= HostsManager::isFirstCnx() ?>'=='1' ? true: false,
+     		isConnected: '<?= HostsManager::IsConnected() ?>'=='1' ? true: false,
+     		rurl : '<?php echo($rurl); ?>',
+			url : '<?php echo($url); ?>'
+	};
 </script>
+
 </head>
 <body> 
 

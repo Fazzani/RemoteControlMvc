@@ -1,229 +1,245 @@
 jQuery.fn.reset = function() {
-    $(this).each(function() {
-	this.reset();
-    });
+	$(this).each(function() {
+		this.reset();
+	});
 };
 
 $(function() {
-	if (isConnected) {
-		var nowPlayingManager = new NowPlayingManager({pageJqM: $(":mobile-pagecontainer").pagecontainer( "getActivePage" )});
+	var xremote = window.xremote || {};
+	xremote.core = {
+		page : {
+			current : $(":mobile-pagecontainer").pagecontainer("getActivePage")
+		},
+		popup : {
+			configpopup : $("#hostconfigpopup"),
+			listConfigPopup : $('#listconfig')
+		},
+		nowPlayingManager  : null
+
+	};
+	if (xremote.context.isConnected) {
+		console.log('xremote.context.isConnected fisrt init');
+		xremote.core.nowPlayingManager = new NowPlayingManager({
+			pageJqM : xremote.core.page.current
+		});
 	}
-    // http://www.appelsiini.net/projects/lazyload
+	// http://www.appelsiini.net/projects/lazyload
 
-    // il faut pas la déplacer sinon elle posera un pb pr les popops.
-    $.mobile.pushStateEnabled = false;
-    // .on( "click", ".show-page-loading-msg", function()
-    // {$.mobile.loading( 'show');})
-    // $.mobile.loader.prototype.options.text = "loading";
-    // $.mobile.loader.prototype.options.textVisible = true;
-    // $.mobile.loader.prototype.options.theme = "a";
-    // $( ".ui-loader" ).loader( "option", "defaults", true );
-    $.mobile.loader.prototype.options.html = "<span class='ui-corner-all ui-loader' data-defaults='false'><img src='assets/img/loader.gif' /></span>";
-    $.mobile.pageLoadErrorMessage = 'Error';
-    $.mobile.ignoreContentEnabled = true;
-    $.mobile.hashListeningEnabled = true;
-    $.mobile.defaultPageTransition = "flow";
+	// il faut pas la déplacer sinon elle posera un pb pr les popops.
+	$.mobile.pushStateEnabled = false;
+	// .on( "click", ".show-page-loading-msg", function()
+	// {$.mobile.loading( 'show');})
+	// $.mobile.loader.prototype.options.text = "loading";
+	// $.mobile.loader.prototype.options.textVisible = true;
+	// $.mobile.loader.prototype.options.theme = "a";
+	// $( ".ui-loader" ).loader( "option", "defaults", true );
+	$.mobile.loader.prototype.options.html = "<span class='ui-corner-all ui-loader' data-defaults='false'><img src='assets/img/loader.gif' /></span>";
+	$.mobile.pageLoadErrorMessage = 'Error';
+	$.mobile.ignoreContentEnabled = true;
+	$.mobile.hashListeningEnabled = true;
+	$.mobile.defaultPageTransition = "flow";
 
-    $.event.special.swipe.scrollSupressionThreshold = 10;
-    // More than this horizontal displacement, and we will
-    // suppress scrolling.
-    $.event.special.swipe.horizontalDistanceThreshold = 25;
-    // Swipe horizontal displacement must be more than this.
-    $.event.special.swipe.durationThreshold = 500;
-    // More time than this, and it isn't a swipe.
-    $.event.special.swipe.verticalDistanceThreshold = 75;
-    // $.mobile.ajaxEnabled = false;
-    // This second step ensures that the insertion of the new
-    // toolbar does not
-    // affect page height
-    // $.mobile.resetActivePageHeight();
-    /**
-     * Gestion_des_configs***********************************************
-     */
-    var configpopup = $("#hostconfigpopup"), 
-    listConfigPopup = $('#listconfig');
-    
-    configpopup.enhanceWithin().popup();
-    listConfigPopup.enhanceWithin().popup();
+	$.event.special.swipe.scrollSupressionThreshold = 10;
+	// More than this horizontal displacement, and we will
+	// suppress scrolling.
+	$.event.special.swipe.horizontalDistanceThreshold = 25;
+	// Swipe horizontal displacement must be more than this.
+	$.event.special.swipe.durationThreshold = 500;
+	// More time than this, and it isn't a swipe.
+	$.event.special.swipe.verticalDistanceThreshold = 75;
+	// $.mobile.ajaxEnabled = false;
+	// This second step ensures that the insertion of the new
+	// toolbar does not
+	// affect page height
+	// $.mobile.resetActivePageHeight();
+	/**
+	 * Gestion_des_configs***********************************************
+	 */
+	xremote.core.popup.configpopup.enhanceWithin().popup();
+	xremote.core.popup.listConfigPopup.enhanceWithin().popup();
 
-    if (isFirstCnx)
-    	configpopup.popup("open");
+	if (xremote.context.isFirstCnx)
+		xremote.core.popup.configpopup.popup("open");
 
-    if (!isConnected)
-    	listConfigPopup.popup("open");
-    
-    $("body").on('connectionLoosed', function(e) {
-	// console.log('connection Loosed...');
-	if (listConfigPopup.closest('.ui-popup-container').hasClass('ui-popup-hidden'))
-	    listConfigPopup.popup("open");
-    }).on('GetBackConnectedEvent', function(e) {
-	// console.log('GetBackConnectedEvent...');
-	if (listConfigPopup.closest('.ui-popup-container').hasClass('ui-popup-active'))
-	    listConfigPopup.popup("close");
+	if (!xremote.context.isConnected)
+		xremote.core.popup.listConfigPopup.popup("open");
 
-    }).on('click', 'a[data-rel]', function(e) {
-	e.preventDefault();
-	// console.log('delete item : ' + $(this).attr('data-rel'));
-	$.getJSON($(this).attr('data-rel')).done(function(json) {
-	    if (json.status == 'ok')
-		document.location = 'http://' + window.location.host + window.location.pathname;
-	    // console.log(json);
-	}).fail(function(jqxhr, textStatus, error) {
-	    var err = textStatus + ", " + error;
-	    console.log("Request Failed: " + err);
+	$("body").on('connectionLoosed', function(e) {
+		// console.log('connection Loosed...');
+		if (xremote.core.popup.listConfigPopup.closest('.ui-popup-container').hasClass('ui-popup-hidden'))
+			xremote.core.popup.listConfigPopup.popup("open");
+	}).on('GetBackConnectedEvent', function(e) {
+		// console.log('GetBackConnectedEvent...');
+		if (xremote.core.popup.listConfigPopup.closest('.ui-popup-container').hasClass('ui-popup-active'))
+			xremote.core.popup.listConfigPopup.popup("close");
+
+	}).on('click', 'a[data-rel]', function(e) {
+		e.preventDefault();
+		// console.log('delete item : ' + $(this).attr('data-rel'));
+		$.getJSON($(this).attr('data-rel')).done(function(json) {
+			if (json.status == 'ok')
+				document.location = 'http://' + window.location.host + window.location.pathname;
+			// console.log(json);
+		}).fail(function(jqxhr, textStatus, error) {
+			var err = textStatus + ", " + error;
+			console.log("Request Failed: " + err);
+		});
+	}).on('click', '#add-conf', function(e) {
+		// console.log($("#hostconfigpopup").closest('.ui-page').attr('id'));
+		// console.log('Adding conf');
+		$('.ui-popup').popup('close');
+		// Add config
+		xremote.core.popup.configpopup.find('form').reset();
+		setTimeout(function() {
+			xremote.core.popup.configpopup.popup().popup("open");
+		}, 400);
+		// $("#hostconfigpopup").first().popup("open");
+	}).on('click', ".config_item", function(e) {
+		// Pré-edit config
+		// console.log("add config : " + $(this).attr('data-val'));
+		var val = JSON.parse($(this).attr('data-val'));
+		xremote.core.popup.configpopup.find('input').each(function(index) {
+
+			if ($(this).attr('name') == 'host')
+				$(this).val(val.host);
+			else if ($(this).attr('name') == 'configname')
+				$(this).val(val.configname);
+			else if ($(this).attr('name') == 'port')
+				$(this).val(val.port);
+			else if ($(this).attr('name') == 'user')
+				$(this).val(val.user);
+			else if ($(this).attr('name') == 'password')
+				$(this).val(val.password);
+			else if ($(this).attr('name') == 'ismodif')
+				$(this).val(true);
+		});
+		$("#hostconfigpopup").popup("open");
+	}).on('click', ".config_select", function(e) {
+		// Modif config
+		// console.log($(this).attr('data-val'));
+		var val = JSON.parse($(this).attr('data-val'));
+		$('#selectedconfig').val(val.configname);
+		$('form#listconfigform').submit();
+	}).on('submit', 'form', function() {
+		var thisform = $(this);
+		thisform.validate();
+
+		if (thisform.valid())
+			$.ajax({
+				url : thisform.attr('action'),
+				type : thisform.attr('method'),
+				data : thisform.serialize(),
+				dataType : 'json',
+				success : function(json) {
+					if (json.status == 'ok')
+						document.location = 'http://' + window.location.host + window.location.pathname;
+				}
+			});
+
+		return false;
+	}).on("focus", ".ui-popup-active input, .ui-popup-active textarea", function() {
+		$(this).closest('.ui-popup').popup("reposition", {
+			y : 0
+		/* move it to top */
+		});
+	}).on("click", "#back2", function() {
+		history.back();
 	});
-    }).on('click', '#add-conf', function(e) {
-	// console.log($("#hostconfigpopup").closest('.ui-page').attr('id'));
-	// console.log('Adding conf');
-	$('.ui-popup').popup('close');
-	// Add config
-	configpopup.find('form').reset();
-	setTimeout(function() {
-	    configpopup.popup().popup("open");
-	}, 400);
-	// $("#hostconfigpopup").first().popup("open");
-    }).on('click', ".config_item", function(e) {
-	// Pré-edit config
-	// console.log("add config : " + $(this).attr('data-val'));
-	var val = JSON.parse($(this).attr('data-val'));
-	configpopup.find('input').each(function(index) {
+	/**
+	 * ********************************************- LocalStorage
+	 * -*************************************************
+	 */
+	// Storage.prototype.setObject = function(key, value) {
+	// this.setItem(key, JSON.stringify(value));
+	// }
+	//
+	// Storage.prototype.getObject = function(key) {
+	// return JSON.parse(this.getItem(key));
+	// }
+	//
+	// if (localStorage) {
+	// // localStorage.setObject("lastconnexion","{ 'one': 1, 'two': 2,
+	// // 'three': 3 }");
+	// }
 
-	    if ($(this).attr('name') == 'host')
-	    	$(this).val(val.host);
-	    else if ($(this).attr('name') == 'configname')
-	    	$(this).val(val.configname);
-	    else if ($(this).attr('name') == 'port')
-	    	$(this).val(val.port);
-	    else if ($(this).attr('name') == 'user')
-	    	$(this).val(val.user);
-	    else if ($(this).attr('name') == 'password')
-	    	$(this).val(val.password);
-	    else if ($(this).attr('name') == 'ismodif')
-	    	$(this).val(true);
-	});
-	$("#hostconfigpopup").popup("open");
-    }).on('click', ".config_select", function(e) {
-	// Modif config
-	// console.log($(this).attr('data-val'));
-	var val = JSON.parse($(this).attr('data-val'));
-	$('#selectedconfig').val(val.configname);
-	$('form#listconfigform').submit();
-    }).on('submit', 'form', function() {
-    	var thisform = $(this);
-    	thisform.validate();
+	/**
+	 * ***********************************************-
+	 * swiper-*************************************************
+	 */
+	$(document).on('mobileinit', function() {
 
-	if (thisform.valid())
-	    $.ajax({
-		url : thisform.attr('action'),
-		type : thisform.attr('method'),
-		data : thisform.serialize(),
-		dataType : 'json',
-		success : function(json) {
-		    if (json.status == 'ok')
-			document.location = 'http://' + window.location.host + window.location.pathname;
+	}).on('pageshow', function(event,pg) {
+		xremote.core.page.current = $(this);
+		if (xremote.context.isConnected) {
+			console.log('pageshow');
+			xremote.core.nowPlayingManager.destroy();
+			xremote.core.nowPlayingManager = new NowPlayingManager();
+			xremote.core.nowPlayingManager.pageJqM = xremote.core.page.current;
 		}
-	    });
+		$('#carousel').elastislide();
+	})
+	.on('pagechange', function(event, obj) {
+		//xremote.core.page.current = obj.toPage;
+		console.log('pagechange');
+		// $("div:jqmData(role='sidemenu')").sidemenu();
+		$("img.lazy").lazyload({
+			effect : "fadeIn"
+		});
+		// Gestion du l'activeState of navBar
+		$('div#mainheader').find('a').not(".ui-state-persist").removeClass($.mobile.activeBtnClass);
+		if (event.currentTarget.activeElement)
+			$("div#mainheader a[id='" + event.currentTarget.activeElement.id + "']").addClass($.mobile.activeBtnClass);
+		else
+			$("div#mainheader a[id='page_home']").addClass($.mobile.activeBtnClass);
 
-	return false;
-    }).on("focus", ".ui-popup-active input, .ui-popup-active textarea", function() {
-    	$(this).closest('.ui-popup').popup("reposition", {
-    		y : 0
-	/* move it to top */
-    	});
-    }).on("click", "#back2", function() {
-    	history.back();
-    });
-    /**
-     * ********************************************- LocalStorage
-     * -*************************************************
-     */
-    // Storage.prototype.setObject = function(key, value) {
-    // this.setItem(key, JSON.stringify(value));
-    // }
-    //
-    // Storage.prototype.getObject = function(key) {
-    // return JSON.parse(this.getItem(key));
-    // }
-    //
-    // if (localStorage) {
-    // // localStorage.setObject("lastconnexion","{ 'one': 1, 'two': 2,
-    // // 'three': 3 }");
-    // }
+	}).on('pagecreate', function(event) {
+		console.log('pagecreate');
+		$(this).on('click', '#add-conf', function(e) {
+			// console.log($("#hostconfigpopup").length);
+			// Add config
+			$("#hostconfigpopup").last().popup("open");
+		});
 
+		$('div.ui-page').on("swipeleft", function(e) {
+			e.stopImmediatePropagation();
+			var idpage = $(this).attr('id');
 
-/**
- * ***********************************************-
- * swiper-*************************************************
- */
-$(document).on('mobileinit', function() {
-	
-}).on('pagechange', function(event) {
-	if (isConnected) {
-		nowPlayingManager=new NowPlayingManager();
-		nowPlayingManager.pageJqM= $(":mobile-pagecontainer").pagecontainer( "getActivePage" );
-	}
-	//$("div:jqmData(role='sidemenu')").sidemenu();
-    $("img.lazy").lazyload({
-    	effect : "fadeIn"
-    });
-    // Gestion du l'activeState of navBar
-    $('div#mainheader').find('a').not(".ui-state-persist").removeClass($.mobile.activeBtnClass);
-    if (event.currentTarget.activeElement)
-    	$("div#mainheader a[id='" + event.currentTarget.activeElement.id + "']").addClass($.mobile.activeBtnClass);
-    else
-    	$("div#mainheader a[id='page_home']").addClass($.mobile.activeBtnClass);
-   
-	
-}).on('pageshow', function(event) {
-    $('#carousel').elastislide();
-}).on('stoppedMedia', function(event) {
-	$("div:jqmData(role='sidemenu')").sidemenu('close', function(sidemenu){
-		sidemenu.hideButton();
+			parentItem = $("div.ui-navbar a[id='" + idpage + "']").parent();
+			if (parentItem.next().length <= 0)
+				href = parentItem.parent().children().first().children().attr('href');
+			else
+				href = parentItem.next().children().attr('href');
+
+			// console.log(href);
+			if (href && href.length > 0) {
+				$.mobile.changePage(href, {
+					changeHash : false
+				});
+			}
+		}).on('stoppedMedia', function(event) {
+		$("div:jqmData(role='sidemenu')").sidemenu('close', function(sidemenu) {
+			sidemenu.hideButton();
+		});
+		xremote.core.page.current.find('#nowPlayingPanel').hide();
+	}).on('playingMedia', function(event) {
+		$("div:jqmData(role='sidemenu')").sidemenu('showButton');
+		xremote.core.page.current.find('#nowPlayingPanel').show();
+	}).on("swiperight", function(e) {
+			e.stopImmediatePropagation();
+			var idpage = $(this).attr('id');
+			parentItem = $("div.ui-navbar a[id='" + idpage + "']").parent();
+
+			if (parentItem.prev().length <= 0)
+				href = parentItem.parent().children().last().children().attr('href');
+			else
+				href = parentItem.prev().children().attr('href');
+
+			// console.log(href);
+			if (href && href.length > 0) {
+				$.mobile.changePage(href, {
+					changeHash : false
+				});
+			}
+		});
 	});
-	$(":mobile-pagecontainer").pagecontainer( "getActivePage" ).find('#nowPlayingPanel').hide();
-}).on('playingMedia', function(event) {
-	$("div:jqmData(role='sidemenu')").sidemenu('showButton');
-	$(":mobile-pagecontainer").pagecontainer( "getActivePage" ).find('#nowPlayingPanel').show();
-}).on('pagecreate', function(event) {
-	
-    $(this).on('click', '#add-conf', function(e) {
-    	// console.log($("#hostconfigpopup").length);
-    	// Add config
-    	$("#hostconfigpopup").last().popup("open");
-    });
-
-    $('div.ui-page').on("swipeleft", function(e) {
-    	e.stopImmediatePropagation();
-    	var idpage = $(this).attr('id');
-
-    	parentItem = $("div.ui-navbar a[id='" + idpage + "']").parent();
-    	if (parentItem.next().length <= 0)
-    		href = parentItem.parent().children().first().children().attr('href');
-    	else
-    		href = parentItem.next().children().attr('href');
-
-    	// console.log(href);
-    	if (href && href.length > 0) {
-    		$.mobile.changePage(href, {
-    			changeHash : false
-	    });
-    	}
-    }).on("swiperight", function(e) {
-    	e.stopImmediatePropagation();
-    	var idpage = $(this).attr('id');
-    	parentItem = $("div.ui-navbar a[id='" + idpage + "']").parent();
-
-    	if (parentItem.prev().length <= 0)
-    		href = parentItem.parent().children().last().children().attr('href');
-    	else
-    		href = parentItem.prev().children().attr('href');
-
-    	// console.log(href);
-    	if (href && href.length > 0) {
-    		$.mobile.changePage(href, {
-    			changeHash : false
-    		});
-    	}
-    });
-});
 });

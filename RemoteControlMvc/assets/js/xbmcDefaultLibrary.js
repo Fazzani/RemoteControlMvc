@@ -22,8 +22,8 @@
 
 			var xbmc = window.xbmc || {};
 			xbmc.core = {
-				'DEFAULT_ALBUM_COVER' : rurl + 'images/DefaultAlbumCover.png',
-				'DEFAULT_VIDEO_COVER' : rurl + 'images/DefaultVideo.png',
+				'DEFAULT_ALBUM_COVER' : xremote.context.rurl + 'images/DefaultAlbumCover.png',
+				'DEFAULT_VIDEO_COVER' : xremote.context.rurl + 'images/DefaultVideo.png',
 				'JSON_RPC' : 'jsonrpc',
 				'applyDeviceFixes' : function() {
 					window.document.addEventListener('touchmove', function(e) {
@@ -119,7 +119,10 @@
 			paused : false,
 			playlistid : -1,
 			ischannel : false,
+			timeoutId : null,
 			init : function() {
+				if(that!=null)
+					$(that).off();
 				that = this;
 				this.lastActivePlayerId=-1;
 				this.getElementById('pbPause').hide(); /* Assume we are not playing something */
@@ -131,8 +134,13 @@
 				});
 				$(window).bind('click', $.proxy(that.hidePlaylist, that));
 			},
+			destroy:function(){
+				console.log('destroying NowPlayingManager');
+				$(that).off();
+				clearTimeout(that.timeoutId);
+			},
 			getElementById: function(id){
-				if(this.pageJqM!=null)
+				if(this.pageJqM != null)
 					return this.pageJqM.find("#"+id);
 				return $("#"+id);
 			},
@@ -177,7 +185,7 @@
 							$(document).trigger('stoppedMedia');
 						}
 					}
-					setTimeout($.proxy(that.updateState, that), 1000);
+					that.timeoutId = setTimeout($.proxy(that.updateState, that), 1000);
 
 				});
 			},
@@ -475,7 +483,7 @@
 							if (that.ischannel)
 								imgPath = 'assets/img/tv.png';
 							else
-								imgPath = rurl + 'image/' + encodeURI(that.activePlaylistItem.thumbnail);
+								imgPath = xremote.context.rurl + 'image/' + encodeURI(that.activePlaylistItem.thumbnail);
 						}
 						that.getElementById('videoCoverArt').html(
 								'<img src="' + imgPath + '" alt="' + that.activePlaylistItem.title + ' cover art">');
@@ -545,9 +553,7 @@
 			},
 			updateVideoPlaylist : function() {
 				// console.log('updateVideoPlaylist');
-				$
-						.getJSON(
-								'inputExecuteAction.php?id=1&method=Playlist.GetItems&param={"playlistid":2'
+				$.getJSON('inputExecuteAction.php?id=1&method=Playlist.GetItems&param={"playlistid":2'
 										+ ''
 										+ ',"properties":["title","season","episode","plot","runtime","showtitle","thumbnail"]}',
 								function(data) {
@@ -606,9 +612,7 @@
 											that.getElementById('nowPlayingPanel').show();
 										}
 									} else {
-										$
-												.getJSON(
-														'inputExecuteAction.php?id=1&method=Player.GetItem&param={"playerid":'
+										$.getJSON('inputExecuteAction.php?id=1&method=Player.GetItem&param={"playerid":'
 																+ that.activePlayerId
 																+ ',"properties":["title","season","episode","plot","runtime","showtitle","thumbnail","channeltype","channelnumber"]}',
 														function(data) {
