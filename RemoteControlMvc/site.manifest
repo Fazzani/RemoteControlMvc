@@ -1,0 +1,17 @@
+CACHE MANIFEST
+
+# Version 0.1
+CACHE:
+assets/js/jquery-1.11.0.min.js
+assets/js/jquery.mobile-1.4.2.min.js
+assets/img/loading.gif
+assets/img/loader-img.gif
+assets/img/setting.png
+assets/img/tv.png
+assets/img/cogs_icon&16.png
+assets/img/home.png
+assets/img/info.png
+assets/img/navtv.png
+assets/img/refresh.png
+assets/img/music.png
+
