@@ -109,7 +109,7 @@
 		};
 
 		NowPlayingManager.prototype = {
-			pageJqM:null,
+			pageJqM : null,
 			updateCounter : 0,
 			activePlayer : "",
 			activePlayerId : -1,
@@ -121,8 +121,8 @@
 			ischannel : false,
 			timeoutId : null,
 			init : function() {
-				if(that!=null)
-					$(that).off();
+				if(that != null)
+				    $(that).off();
 				that = this;
 				this.lastActivePlayerId=-1;
 				this.getElementById('pbPause').hide(); /* Assume we are not playing something */
@@ -134,18 +134,17 @@
 				});
 				$(window).bind('click', $.proxy(that.hidePlaylist, that));
 			},
-			destroy:function(){
+			destroy : function(){
 				console.log('destroying NowPlayingManager');
 				$(that).off();
 				clearTimeout(that.timeoutId);
 			},
-			getElementById: function(id){
+			getElementById : function(id){
 				if(this.pageJqM != null)
-					return this.pageJqM.find("#"+id);
+				    return this.pageJqM.find("#"+id);
 				return $("#"+id);
 			},
 			updateState : function() {
-
 				$.getJSON('inputExecuteAction.php?id=1&method=Player.GetActivePlayers', function(data) {
 					if (data && data.result && data.result.length > 0) {
 						if (data.result[0].playerid != this.activePlayerId) {
@@ -319,17 +318,15 @@
 				return false;
 			},
 			updateAudioPlaylist : function() {
-				$
-						.getJSON(
-								'inputExecuteAction.php?id=1&method=Playlist.GetItems&param={"playlistid":'
-										+ that.playlistid
-										+ ',"properties":["title","season","episode","plot","runtime","showtitle","thumbnail"]}',
-								function(data) {
-									if (data && data.result && data.result.items && data.result.items.length > 0
-											&& data.result.limits.total > 0) {
-										if (!that.activePlaylistItem
-												|| that.playlistChanged(data.result.items)
-												|| (that.activePlaylistItem && (that.activePlaylistItem.seq != that.currentItem))) {
+				$.getJSON('inputExecuteAction.php?id=1&method=Playlist.GetItems&param={"playlistid":'
+					+ that.playlistid
+					+ ',"properties":["title","season","episode","plot","runtime","showtitle","thumbnail"]}',
+						function(data) {
+							if (data && data.result && data.result.items && data.result.items.length > 0
+								&& data.result.limits.total > 0) {
+							    if (!that.activePlaylistItem
+											|| that.playlistChanged(data.result.items)
+											|| (that.activePlaylistItem && (that.activePlaylistItem.seq != that.currentItem))) {
 											var ul = $('<ul>');
 											var activeItem;
 											$.each($(data.result.items), jQuery.proxy(function(i, item) {

@@ -168,6 +168,14 @@ $(function() {
 	 */
 	$(document).on('mobileinit', function() {
 
+	}).on('stoppedMedia', function(event) {
+		$("div:jqmData(role='sidemenu')").sidemenu('close', function(sidemenu) {
+			sidemenu.hideButton();
+		});
+		xremote.core.page.current.find('#nowPlayingPanel').hide();
+	}).on('playingMedia', function(event) {
+		$("div:jqmData(role='sidemenu')").sidemenu('showButton');
+		xremote.core.page.current.find('#nowPlayingPanel').show();
 	}).on('pageshow', function(event,pg) {
 		xremote.core.page.current = $(this);
 		if (xremote.context.isConnected) {
@@ -216,15 +224,7 @@ $(function() {
 					changeHash : false
 				});
 			}
-		}).on('stoppedMedia', function(event) {
-		$("div:jqmData(role='sidemenu')").sidemenu('close', function(sidemenu) {
-			sidemenu.hideButton();
-		});
-		xremote.core.page.current.find('#nowPlayingPanel').hide();
-	}).on('playingMedia', function(event) {
-		$("div:jqmData(role='sidemenu')").sidemenu('showButton');
-		xremote.core.page.current.find('#nowPlayingPanel').show();
-	}).on("swiperight", function(e) {
+		}).on("swiperight", function(e) {
 			e.stopImmediatePropagation();
 			var idpage = $(this).attr('id');
 			parentItem = $("div.ui-navbar a[id='" + idpage + "']").parent();
