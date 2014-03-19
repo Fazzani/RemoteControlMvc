@@ -23,35 +23,7 @@ $(function() {
 			pageJqM : xremote.core.page.current
 		});
 	}
-	// http://www.appelsiini.net/projects/lazyload
 
-	// il faut pas la déplacer sinon elle posera un pb pr les popops.
-	$.mobile.pushStateEnabled = false;
-	// .on( "click", ".show-page-loading-msg", function()
-	// {$.mobile.loading( 'show');})
-	// $.mobile.loader.prototype.options.text = "loading";
-	// $.mobile.loader.prototype.options.textVisible = true;
-	// $.mobile.loader.prototype.options.theme = "a";
-	// $( ".ui-loader" ).loader( "option", "defaults", true );
-	$.mobile.loader.prototype.options.html = "<span class='ui-corner-all ui-loader' data-defaults='false'><img src='assets/img/loader.gif' /></span>";
-	$.mobile.pageLoadErrorMessage = 'Error';
-	$.mobile.ignoreContentEnabled = true;
-	$.mobile.hashListeningEnabled = true;
-	$.mobile.defaultPageTransition = "flow";
-
-	$.event.special.swipe.scrollSupressionThreshold = 10;
-	// More than this horizontal displacement, and we will
-	// suppress scrolling.
-	$.event.special.swipe.horizontalDistanceThreshold = 25;
-	// Swipe horizontal displacement must be more than this.
-	$.event.special.swipe.durationThreshold = 500;
-	// More time than this, and it isn't a swipe.
-	$.event.special.swipe.verticalDistanceThreshold = 75;
-	// $.mobile.ajaxEnabled = false;
-	// This second step ensures that the insertion of the new
-	// toolbar does not
-	// affect page height
-	// $.mobile.resetActivePageHeight();
 	/**
 	 * Gestion_des_configs***********************************************
 	 */
@@ -152,7 +124,7 @@ $(function() {
 		/* move it to top */
 		});
 	}).on("click", "#back2", function() {
-		history.back();
+		$.mobile.back();
 	});
 	/**
 	 * ********************************************- LocalStorage

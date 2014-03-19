@@ -59,6 +59,32 @@
    type="text/javascript"
 >
 
+$(document).on('mobileinit',function(){
+	
+	console.log('mobileinit');
+	$.mobile.pushStateEnabled = false;
+	// $.mobile.loader.prototype.options.text = "loading";
+	// $.mobile.loader.prototype.options.textVisible = true;
+	// $.mobile.loader.prototype.options.theme = "a";
+	$.mobile.loader.prototype.options.html = "<span class='ui-corner-all ui-loader' data-defaults='false'><img src='assets/img/loader.gif' /></span>";
+	$.mobile.pageLoadErrorMessage = 'Error';
+	$.mobile.ignoreContentEnabled = true;
+	$.mobile.hashListeningEnabled = true;
+	$.mobile.defaultPageTransition = $.mobile.transitionFallbacks.flow;
+	$.event.special.swipe.scrollSupressionThreshold = 10;
+	// More than this horizontal displacement, and we will
+	// suppress scrolling.
+	$.event.special.swipe.horizontalDistanceThreshold = 25;
+	// Swipe horizontal displacement must be more than this.
+	$.event.special.swipe.durationThreshold = 500;
+	// More time than this, and it isn't a swipe.
+	$.event.special.swipe.verticalDistanceThreshold = 75;
+	// $.mobile.ajaxEnabled = false;
+	// This second step ensures that the insertion of the new
+	// toolbar does not
+	// affect page height
+	// $.mobile.resetActivePageHeight();
+});
 var xremote = window.xremote || {};
 xremote.context = {		
 			isFirstCnx : '<?= HostsManager::isFirstCnx() ?>'=='1' ? true: false,
