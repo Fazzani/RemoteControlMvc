@@ -3,7 +3,7 @@
 /* This controller renders the category pages */
 class TvShowsController extends BaseController {
 	public function handleRequest() {
-		if ($_GET ['season']) {
+		if (isset($_GET ['season'])) {
 			$action = sprintf ( parent::getEpisodes, $_GET ['tvshows'], $_GET ['season'] );
 			$view = "tvshowsEpisode";
 		} else {

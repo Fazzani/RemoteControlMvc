@@ -133,6 +133,15 @@ $(function() {
 				success : function(json) {
 					if (json.status == 'ok')
 						document.location = 'http://' + window.location.host + window.location.pathname;
+				},
+				beforeSend : function() {
+					$.mobile.showPageLoadingMsg(true); 
+				},
+				complete : function() {
+					$.mobile.hidePageLoadingMsg();
+				},
+				error : function(request, error) {
+					alert('Network error has occurred please try again!');
 				}
 			});
 
