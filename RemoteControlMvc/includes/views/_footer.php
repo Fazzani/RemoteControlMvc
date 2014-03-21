@@ -105,8 +105,68 @@
    ?>
    </form>
 </div>
+<div data-role="sidemenu" data-headername="Lecteur" data-widthcoef="0.6">
+		<div style="height: 100%" id="nowPlayingPanel">
+      <div id="nowPlayingContent">
+         <div id="audioDescription">
+            <div id="audioCoverArt"></div>
+            <div id="audioTrackWrap">
+               <div id="audioArtistTitle"></div>
+               <div id="audioAlbumTitle"></div>
+            </div>
+            <div id="audioTrackTitle"></div>
+            <div id="audioDuration"></div>
+         </div>
+         <div id="videoDescription">
+            <div id="videoCoverArt"></div>
+            <div id="videoTrackWrap">
+               <div id="videoShowTitle"></div>
+            </div>
+            <div id="videoTitle"></div>
+            <div id="videoDuration"></div>
+         </div>
+         <div id="lecteur">
+            <span
+               title="Previous"
+               id="pbPrev"
+            ></span> <span
+               title="Pause"
+               id="pbPause"
+               style="display: none;"
+            ></span> <span
+               title="Play"
+               id="pbPlay"
+            ></span> <span
+               title="Stop"
+               id="pbStop"
+            ></span> <span
+               title="Next"
+               id="pbNext"
+            ></span>
+         </div>
+      </div>
+      <div id="playbackControls">
+         <div id="progressBar">
+            <div
+               style="width: 0%"
+               class="elapsedTime"
+            ></div>
+            <span class="progressIndicator"></span>
+         </div>
+      </div>
+      <span id="nextText">Next: </span>
+      <div
+         style="display: none;"
+         id="nextTrack"
+      ></div>
+      <div
+         style="display: none;"
+         id="nowPlayingPlaylist"
+      ></div>
+   </div>
+	</div>
 </body>
+<!-- <script src="assets/js/MediaLibrary.js"></script> -->
 <script src="assets/js/xbmcDefaultLibrary.js"></script>
-<script src="assets/js/MediaLibrary.js"></script>
 <script src="assets/js/simple-app.js"></script>
 </html>

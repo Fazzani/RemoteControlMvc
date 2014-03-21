@@ -18,8 +18,8 @@
 *
 */
 var MediaLibrary = function() {
-this.init();
-return true;
+	this.init();
+	return true;
 };
 MediaLibrary.prototype = {	playlists : {},
 	init : function() {
@@ -48,10 +48,6 @@ MediaLibrary.prototype = {	playlists : {},
 	},
 	getPlaylists : function() {
 	var that =this;
-//		xbmc.rpc.request({
-//			'context' : this,
-//			'method' : 'Playlist.GetPlaylists',
-//			'timeout' : 3000,
 		$.getJSON('inputExecuteAction.php?id=1&method=Playlist.GetPlaylists',function(data) {
 				if (data && data.result && data.result.length > 0) {
 					$.each($(data.result), jQuery.proxy(function(i, item) {
@@ -452,8 +448,7 @@ MediaLibrary.prototype = {	playlists : {},
 		$('#topScrollFade').hide();
 		if (!albumDetailsContainer || albumDetailsContainer.length == 0) {
 $('#spinner').show();
-xbmc.rpc.request({
-										'context' : this,
+xbmc.rpc.request({'context' : this,
 						'method' : 'AudioLibrary.GetSongs',
 						'params' : {
 							'properties' : [ 'title', 'artist', 'genre', 'track', 'duration', 'year', 'rating',

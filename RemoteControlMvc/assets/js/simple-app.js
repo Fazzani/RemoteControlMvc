@@ -5,23 +5,36 @@ jQuery.fn.reset = function() {
 };
 
 $(function() {
+	"use strict"
+	
+	$.ajaxSetup({
+		timeout : 3000
+	});
 	var xremote = window.xremote || {};
 	xremote.core = {
 		page : {
-			current : $(":mobile-pagecontainer").pagecontainer("getActivePage")
+			current : $(":mobile-pagecontainer").pagecontainer("getActivePage"),
+			reloadCurrentPage : function() {
+				$.mobile.changePage(window.location.href, {
+					allowSamePageTransition : true,
+					transition : 'none',
+					showLoadMsg : false,
+					reloadPage : true
+				});
+			}
 		},
 		popup : {
 			configpopup : $("#hostconfigpopup"),
 			listConfigPopup : $('#listconfig')
 		},
-		nowPlayingManager  : null
+		nowPlayingManager : null
 
 	};
 	if (xremote.context.isConnected) {
+		console.log($("div:jqmData(role='sidemenu')").length);
+		$("div:jqmData(role='sidemenu')").sidemenu();
 		console.log('xremote.context.isConnected fisrt init');
-		xremote.core.nowPlayingManager = new NowPlayingManager({
-			pageJqM : xremote.core.page.current
-		});
+		xremote.core.nowPlayingManager = new NowPlayingManager();
 	}
 
 	/**
@@ -85,14 +98,16 @@ $(function() {
 			else if ($(this).attr('name') == 'ismodif')
 				$(this).val(true);
 		});
-		$("#hostconfigpopup").popup("open");
+		xremote.core.popup.configpopup.popup("open");
 	}).on('click', ".config_select", function(e) {
 		// Modif config
 		// console.log($(this).attr('data-val'));
 		var val = JSON.parse($(this).attr('data-val'));
 		$('#selectedconfig').val(val.configname);
 		$('form#listconfigform').submit();
-	}).on('submit', 'form', function() {
+	}).on('submit', 'form', function(e) {
+		e.preventDefault();
+		console.log('submit form');
 		var thisform = $(this);
 		thisform.validate();
 
@@ -103,14 +118,16 @@ $(function() {
 				data : thisform.serialize(),
 				dataType : 'json',
 				success : function(json) {
-					if (json.status == 'ok')
-						document.location = 'http://' + window.location.host + window.location.pathname;
+					if (json.status == 'ok') {
+						$.mobile.loading('hide');
+						xremote.core.page.reloadCurrentPage();
+					}
 				},
 				beforeSend : function() {
-					$.mobile.showPageLoadingMsg(true); 
+					$.mobile.loading('show');
 				},
 				complete : function() {
-					$.mobile.hidePageLoadingMsg();
+					$.mobile.loading('hide');
 				},
 				error : function(request, error) {
 					alert('Network error has occurred please try again!');
@@ -142,7 +159,6 @@ $(function() {
 	// // localStorage.setObject("lastconnexion","{ 'one': 1, 'two': 2,
 	// // 'three': 3 }");
 	// }
-
 	/**
 	 * ***********************************************-
 	 * swiper-*************************************************
@@ -158,16 +174,15 @@ $(function() {
 		$("div:jqmData(role='sidemenu')").sidemenu('showButton');
 		xremote.core.page.current.find('#nowPlayingPanel').show();
 	}).on('pageshow', function(event, pg) {
-		xremote.core.page.current =  $(":mobile-pagecontainer").pagecontainer("getActivePage");
-		if (xremote.context.isConnected) {
-			console.log('pageshow');
-			xremote.core.nowPlayingManager.destroy();
-			xremote.core.nowPlayingManager = new NowPlayingManager();
-			xremote.core.nowPlayingManager.pageJqM = xremote.core.page.current;
-		}
+		xremote.core.page.current = $(":mobile-pagecontainer").pagecontainer("getActivePage");
+		// if (xremote.context.isConnected) {
+		// console.log('pageshow');
+		// //xremote.core.nowPlayingManager.destroy();
+		// xremote.core.nowPlayingManager = new
+		// NowPlayingManager(xremote.core.nowPlayingManager.pageJqM);
+		// }
 		$('#carousel').elastislide();
-	})
-	.on('pagechange', function(event, obj) {
+	}).on('pagechange', function(event, obj) {
 		$("img.lazy").lazyload({
 			effect : "fadeIn"
 		});

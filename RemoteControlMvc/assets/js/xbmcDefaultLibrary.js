@@ -109,7 +109,6 @@
 		};
 
 		NowPlayingManager.prototype = {
-			pageJqM : null,
 			updateCounter : 0,
 			activePlayer : "",
 			activePlayerId : -1,
@@ -119,7 +118,6 @@
 			paused : false,
 			playlistid : -1,
 			ischannel : false,
-			timeoutId : [],
 			init : function() {
 				that = this;
 				this.lastActivePlayerId = -1;
@@ -134,17 +132,8 @@
 			},
 			destroy : function(){
 				$(that).off();
-				$.each(that.timeoutId, function(i){
-				    clearTimeout(that.timeoutId[i]);
-				});
-				
 			},
 			getElementById : function(id){
-			    
-				if(this.pageJqM != null){
-				    return $(this.pageJqM[0]).find("#"+id);
-				}
-				    
 				return $("#"+id);
 			},
 			updateState : function() {
@@ -187,7 +176,7 @@
 							$(document).trigger('stoppedMedia');
 						}
 					}
-					that.timeoutId.push(setTimeout($.proxy(that.updateState, that), 1000));
+					setTimeout($.proxy(that.updateState, that), 1000);
 
 				});
 			},
@@ -222,11 +211,11 @@
 						});
 			},
 			bindPlaybackControls : function() {
-				that.getElementById('pbNext').bind('click', jQuery.proxy(that.nextTrack, that));
-				that.getElementById('pbPrev').bind('click', jQuery.proxy(that.prevTrack, that));
-				that.getElementById('pbStop').bind('click', jQuery.proxy(that.stopTrack, that));
-				that.getElementById('pbPlay').bind('click', jQuery.proxy(that.playPauseTrack, that));
-				that.getElementById('pbPause').bind('click', jQuery.proxy(that.playPauseTrack, that));
+				that.getElementById('pbNext').bind('click', $.proxy(that.nextTrack, that));
+				that.getElementById('pbPrev').bind('click', $.proxy(that.prevTrack, that));
+				that.getElementById('pbStop').bind('click', $.proxy(that.stopTrack, that));
+				that.getElementById('pbPlay').bind('click', $.proxy(that.playPauseTrack, that));
+				that.getElementById('pbPause').bind('click', $.proxy(that.playPauseTrack, that));
 			},
 			showPlaylist : function() {
 				that.getElementById('nextText').html('Playlist: ');
@@ -289,19 +278,13 @@
 			},
 			playPlaylistItem : function(sender) {
 				var sequenceId = $(sender.currentTarget).attr('seq');
-				if (!that.activePlaylistItem
-						|| (this.activePlaylistItem !== undefined && sequenceId != that.activePlaylistItem.seq)) {
-					xbmc.rpc.request({
-						'method' : 'Player.GoTo',
-						'params' : {
-							'playerid' : that.activePlayerId,
-							'to' : sequenceId
-						},
-						'success' : function() {
-						}
+				if (!this.activePlaylistItem
+						|| (this.activePlaylistItem !== undefined && sequenceId != this.activePlaylistItem.seq)) {
+					$.getJSON('inputExecuteAction.php?id=1&method=Player.GoTo&param={"playerid":' + this.activePlayerId
+							+ ',"to":'+sequenceId+'}', function(data) {
 					});
 				}
-				that.hidePlaylist();
+				this.hidePlaylist();
 			},
 			playlistChanged : function(newPlaylist) {
 				if (that.activePlaylist && !newPlaylist || !that.activePlaylist && newPlaylist) {
@@ -765,9 +748,4 @@
 							});
 
 						});
-		// var mediaLibrary = new MediaLibrary(),
-		//nowPlayingManager = new NowPlayingManager();
-		// that = nowPlayingManager;
-		// xbmc.core.applyDeviceFixes();
-
 
