@@ -7,10 +7,7 @@
 require_once "includes/helpers.php";
 require_once "includes/config.php";
 require_once "includes/controllers/BaseController.php";
-// require_once "includes/models/product.model.php";
-// require_once "includes/models/category.model.php";
 require_once "includes/controllers/home.controller.php";
-//require_once "includes/controllers/category.controller.php";
 require_once "includes/controllers/tvshows.controller.php";
 require_once "includes/controllers/settings.controller.php";
 require_once "includes/controllers/livetv.controller.php";

@@ -15,7 +15,7 @@ try {
 		href="#"
 		class="xbmcAction"
 		data-method="Player.Open"
-		data-params='{"item":{"movieid":<?= $tvshow["episodeid"]?>}}'
+		data-params='{"item":{"episodeid":<?= $tvshow["episodeid"]?>}}'
 	>
 	<img
 		src="assets/img/loader-img.gif" 

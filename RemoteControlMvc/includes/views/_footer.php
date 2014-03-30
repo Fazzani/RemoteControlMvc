@@ -106,7 +106,7 @@
    </form>
 </div>
 <div data-role="sidemenu" data-headername="Lecteur" data-widthcoef="0.6">
-		<div style="height: 100%" id="nowPlayingPanel">
+	<div style="height: 100%" id="nowPlayingPanel">
       <div id="nowPlayingContent">
          <div id="audioDescription">
             <div id="audioCoverArt"></div>

@@ -661,8 +661,7 @@
 		}, 2000);
 
 		var cid = "";
-		$("body")
-				.on('click', '.playeraction', function() {
+		$("body").on('click', '.playeraction', function() {
 					cid = $(this);
 					$.getJSON('inputExecuteAction.php?id=1&action=' + cid.attr("id")).done(function(data) {
 						// console.log("success " + cid.attr("id"));
@@ -679,18 +678,11 @@
 						var obj = $.parseJSON(JSON.stringify(data.responseText.replace('$daurl', '')));
 						console.log(obj.error);
 					});
-
 				})
-				.on(
-						'click',
-						'.xbmcAction',
-						function() {
+				.on('click','.xbmcAction',function() {
 							var listchnls = $('#rightsystem ul');
-							$
-									.getJSON(
-											'inputExecuteAction.php?id=1&method=' + $(this).attr('data-method')
-													+ "&param=" + $(this).attr('data-params'))
-									.done(
+							$.getJSON('inputExecuteAction.php?id=1&method=' + $(this).attr('data-method')
+													+ "&param=" + $(this).attr('data-params')).done(
 											function(data) {
 												var obj = $.parseJSON(JSON.stringify(data));
 												if (obj.error)
@@ -698,9 +690,7 @@
 												else if (obj.result.channelgroupdetails) {
 													var html = "";
 													var oldclassLi = listchnls.find('a').attr("class");
-													$
-															.each(
-																	obj.result.channelgroupdetails.channels,
+													$.each(obj.result.channelgroupdetails.channels,
 																	function(i, item) {
 																		html += "<li><a href=\"#\" class=\""
 																				+ oldclassLi
@@ -721,10 +711,7 @@
 										console.log('fail!!!!! the error is : ' + obj.error);
 									});
 
-						}).on(
-						'click',
-						'.nestedList',
-						function() {
+						}).on('click','.nestedList',function() {
 							var nestedlist = $(this).find('ul#nestedLevel1');
 							$.getJSON(
 									'inputExecuteAction.php?id=1&method=' + $(this).attr('data-method') + "&param="
@@ -743,7 +730,6 @@
 
 							}).fail(function(data) {
 								var obj = $.parseJSON(JSON.stringify(data.responseText.replace('$daurl', '')));
-
 								console.log('fail!!!!! the error is : ' + obj.error);
 							});
 

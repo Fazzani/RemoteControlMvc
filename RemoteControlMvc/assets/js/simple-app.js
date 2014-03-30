@@ -107,7 +107,6 @@ $(function() {
 		$('form#listconfigform').submit();
 	}).on('submit', 'form', function(e) {
 		e.preventDefault();
-		console.log('submit form');
 		var thisform = $(this);
 		thisform.validate();
 
